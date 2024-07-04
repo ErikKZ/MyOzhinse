@@ -50,11 +50,11 @@ interface ApiIInterface {
         @Body requestUserInfo: UserInfoRequest
     ): UserInfo
 
-    @HTTP(method = "PUT", path = "/core/V1/user/profile/", hasBody = true)
-    suspend fun updateUserPassword(
-        @Header("Authorization") token: String,
-        @Body requestUserInfo: ChangePasswordRequest
-    ): UserInfo  //***********
+//    @HTTP(method = "PUT", path = "/core/V1/user/profile/", hasBody = true)   // не работает в приложении
+//    suspend fun updateUserPassword(
+//        @Header("Authorization") token: String,
+//        @Body requestUserInfo: ChangePasswordRequest
+//    ): UserInfo  //***********
 
     @POST("/core/V1/favorite")
     suspend fun addToFavorite(
