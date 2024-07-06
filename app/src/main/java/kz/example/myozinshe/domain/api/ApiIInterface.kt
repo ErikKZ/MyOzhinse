@@ -3,6 +3,7 @@ package kz.example.myozinshe.domain.api
 import kz.example.myozinshe.domain.models.CategoryMovieResponse
 import kz.example.myozinshe.domain.models.ChangePasswordRequest
 import kz.example.myozinshe.domain.models.GenreResponse
+import kz.example.myozinshe.domain.models.LoginRequest
 import kz.example.myozinshe.domain.models.LoginResponse
 import kz.example.myozinshe.domain.models.MovieIdModel
 import kz.example.myozinshe.domain.models.SearchResponseModel
@@ -20,7 +21,7 @@ import retrofit2.http.Query
 
 interface ApiIInterface {
     @POST("/core/V1/signin")
-    suspend fun login(@Body loginRequest: LoginResponse): Response<LoginResponse>
+    suspend fun login(@Body loginRequest: LoginRequest): Response<LoginResponse>
 
     @POST("/core/V1/signup")
     suspend fun regIn(@Body loginRequest: LoginResponse): Response<LoginResponse>

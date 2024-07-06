@@ -80,7 +80,7 @@
             android:textColorHint="@color/grey_400"
             app:layout_constraintEnd_toEndOf="parent"
             android:theme="@style/style_editText_Oz"
-            android:text="Сіздің email" />
+            android:hint="Сіздің email" />
 
         <TextView
             android:id="@+id/textTvErrorEmailLogIn"
