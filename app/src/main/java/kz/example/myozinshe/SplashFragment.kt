@@ -1,0 +1,72 @@
+package kz.example.myozinshe
+
+import android.os.Bundle
+import androidx.fragment.app.Fragment
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
+import kz.example.myozinshe.data.preference.PreferenceProvider
+import kz.example.myozinshe.databinding.FragmentSplashBinding
+import kz.example.myozinshe.domain.utils.provideNavigationHost
+
+
+class SplashFragment : Fragment() {
+    private lateinit var binding: FragmentSplashBinding
+
+
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        // Inflate the layout for this fragment
+        binding = FragmentSplashBinding.inflate(layoutInflater,container,false)
+        return binding.root        // inflater.inflate(R.layout.fragment_splash, container, false)
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        val token = PreferenceProvider(requireContext()).getToken()
+
+        lifecycleScope.launch {
+            delay(1)
+            navigateBasedOnToken(token)
+        }
+    }
+
+    private fun navigateBasedOnToken(token: String?) {
+        if (token == "without_token") {
+            findNavController().navigate(R.id.welcomeFragment)
+        } else if (token.isNullOrEmpty() ) {
+            findNavController().navigate(R.id.welcomeFragment)   //**********
+        } else {
+            findNavController().navigate(R.id.welcomeFragment)
+        }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        updateNavigationHost()
+    }
+
+    override fun onPause() {
+        super.onPause()
+        updateNavigationHost()
+    }
+
+    private fun updateNavigationHost() {
+        provideNavigationHost()?.apply {
+            setNavigationVisibility(false)
+            setNavigationToolBar(false,true)
+        }
+    }
+
+
+
+
+
+}
