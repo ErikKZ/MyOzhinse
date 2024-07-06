@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:labelVisibilityMode="unlabeled">
+    <item
+        android:icon="@drawable/style_navbar_home_action"
+        android:title="@string/home" />
+    <item
+        android:icon="@drawable/style_navbar_search_action"
+        android:title="@string/search" />
+    <item
+        android:icon="@drawable/style_navbar_favorite_action"
+        android:title="@string/favorite" />
+    <item
+        android:icon="@drawable/style_navbar_profile_action"
+        android:title="@string/profile" />
+</menu>

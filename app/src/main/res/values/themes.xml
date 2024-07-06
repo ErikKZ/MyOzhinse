@@ -1,9 +1,17 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- Base application theme. -->
-    <style name="Base.Theme.MyOzinshe" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Customize your light theme here. -->
-        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+
+    <style name="Theme.MyOzinshe" parent="Theme.Material3.DayNight.NoActionBar">
+        <!-- Добавление атрибутов темы -->
+        <item name="colorPrimary">@color/white</item>
+        <item name="colorOnPrimary">@color/grey_900</item>
+        <item name="backgroundColor">@color/white</item>
+        <item name="colorOnSecondary">@color/grey_400</item>
+
+        <!-- Добавьте другие атрибуты темы по необходимости -->
     </style>
 
-    <style name="Theme.MyOzinshe" parent="Base.Theme.MyOzinshe" />
+    <style name="ThemeOverlay.MyOzinshe.FullscreenContainer" parent="">
+        <item name="fullscreenBackgroundColor">@color/light_blue_600</item>
+        <item name="fullscreenTextColor">@color/light_blue_A200</item>
+    </style>
 </resources>
