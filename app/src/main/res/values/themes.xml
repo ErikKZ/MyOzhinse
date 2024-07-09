@@ -6,7 +6,7 @@
         <item name="colorOnPrimary">@color/grey_900</item>
         <item name="backgroundColor">@color/white</item>
         <item name="colorOnSecondary">@color/grey_400</item>
-
+        <item name="iconTint">@color/grey_800</item>
         <!-- Добавьте другие атрибуты темы по необходимости -->
     </style>
 

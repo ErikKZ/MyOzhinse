@@ -7,23 +7,23 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
 import kz.example.myozinshe.R
-import kz.example.myozinshe.domain.api.ApiIInterface
+import kz.example.myozinshe.domain.api.ApiInterface
 import kz.example.myozinshe.domain.api.ServiceBuilder
 import kz.example.myozinshe.domain.models.LoginRequest
 import kz.example.myozinshe.domain.models.LoginResponse
 import java.io.IOException
 
 class LoginViewModel: ViewModel() {
-    private val apiService = ServiceBuilder.buildService(ApiIInterface::class.java)
+    private val apiService = ServiceBuilder.buildService(ApiInterface::class.java)
 
-    private val _loginResponse = MutableLiveData<LoginResponse>()
-    val loginResponse: LiveData<LoginResponse> = _loginResponse
+    private val _loginBody = MutableLiveData<LoginResponse>()
+    val loginBody: LiveData<LoginResponse> = _loginBody
 
-    private val _emailError = MutableLiveData<Boolean?>()
-    val emailError: LiveData<Boolean?> = _emailError
+    private val _emailError = MutableLiveData<Boolean>()
+    val emailError: LiveData<Boolean> = _emailError
 
-    private val _pawsswordError = MutableLiveData<Boolean?>()
-    val passwordError: LiveData<Boolean?> = _pawsswordError
+    private val _pawsswordError = MutableLiveData<Boolean>()
+    val passwordError: LiveData<Boolean> = _pawsswordError
 
 
 
@@ -37,7 +37,7 @@ class LoginViewModel: ViewModel() {
     }
 
     private fun isValidEmail(email: String): Boolean {
-        val isValid = email.matches(Regex("[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+"))
+        val isValid = email.matches(Regex("^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$"))
         _emailError.value = !isValid
         return isValid
     }
@@ -55,11 +55,13 @@ class LoginViewModel: ViewModel() {
         }
 
         viewModelScope.launch {
-            try {
+            runCatching {
                 val response = apiService.login(LoginRequest(email, password))
                 if (response.isSuccessful) {
-                    _loginResponse.value = response.body()
+                    _loginBody.value = response.body()
+                    Log.d("AAA", "executeLogin: ${response.body()}")
                 } else {
+                    Log.d("AAA", "error: ${response.code()}")
                     when (response.code()) {
                         401 -> _loginErrorCode.value = R.string.error_invalid_credentials
                         404 -> _loginErrorCode.value = R.string.error_network
@@ -67,9 +69,7 @@ class LoginViewModel: ViewModel() {
                         else -> _loginErrorCode.value = R.string.error_network
                     }
                 }
-            } catch (e: IOException) {
-                _loginErrorCode.value = R.string.error_network
-            }  catch (e: Exception) {
+            }.onFailure { e ->
                 Log.e("LoginError", "Failed to login", e)
                 _loginErrorCode.value = R.string.error_network
             }

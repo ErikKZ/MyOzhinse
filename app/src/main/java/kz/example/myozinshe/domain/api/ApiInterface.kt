@@ -1,7 +1,6 @@
 package kz.example.myozinshe.domain.api
 
 import kz.example.myozinshe.domain.models.CategoryMovieResponse
-import kz.example.myozinshe.domain.models.ChangePasswordRequest
 import kz.example.myozinshe.domain.models.GenreResponse
 import kz.example.myozinshe.domain.models.LoginRequest
 import kz.example.myozinshe.domain.models.LoginResponse
@@ -19,12 +18,12 @@ import retrofit2.http.POST
 import retrofit2.http.Path
 import retrofit2.http.Query
 
-interface ApiIInterface {
-    @POST("/core/V1/signin")
+interface ApiInterface {
+    @POST("/auth/V1/signin")
     suspend fun login(@Body loginRequest: LoginRequest): Response<LoginResponse>
 
-    @POST("/core/V1/signup")
-    suspend fun regIn(@Body loginRequest: LoginResponse): Response<LoginResponse>
+    @POST("/auth/V1/signup")
+    suspend fun regIn(@Body loginRequest: LoginRequest): Response<LoginResponse>
 
     @GET("/core/V1/movies/page")
     suspend fun getCategoryMovie(

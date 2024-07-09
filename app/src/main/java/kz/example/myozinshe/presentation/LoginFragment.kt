@@ -1,6 +1,8 @@
 package kz.example.myozinshe.presentation
 
 import android.os.Bundle
+import android.text.method.HideReturnsTransformationMethod
+import android.text.method.PasswordTransformationMethod
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -16,7 +18,6 @@ import kz.example.myozinshe.data.preference.PreferenceProvider
 import kz.example.myozinshe.databinding.FragmentLoginBinding
 import kz.example.myozinshe.domain.utils.provideNavigationHost
 import kz.example.myozinshe.presentation.viewModel.LoginViewModel
-import kotlin.math.log
 
 class LoginFragment : Fragment() {
     private lateinit var binding: FragmentLoginBinding
@@ -34,7 +35,8 @@ class LoginFragment : Fragment() {
     }
 
     private fun setupObservers() {
-        loginViewModel.loginResponse.observe(viewLifecycleOwner, Observer { responseBody ->
+    loginViewModel.apply {
+        loginBody.observe(viewLifecycleOwner, Observer { responseBody ->
             PreferenceProvider(requireContext()).apply {
                 saveToken(responseBody.accessToken)
                 saveLanguage("Қазақша")
@@ -42,21 +44,22 @@ class LoginFragment : Fragment() {
             navigate(R.id.loginFragment)
         })
 
-        loginViewModel.emailError.observe(viewLifecycleOwner, Observer { error ->
+        emailError.observe(viewLifecycleOwner, Observer { error ->
             updateUIForError(binding.textTvErrorEmailLogIn, error, R.string.error_invalid_email_format, binding.editTextEmailLogIn, R.drawable.style_edittext_error)
         })
 
-        loginViewModel.passwordError.observe(viewLifecycleOwner, Observer { error ->
+        passwordError.observe(viewLifecycleOwner, Observer { error ->
             updateUIForError(binding.textTvErrorResultLogIn, error, R.string.error_short_password)
         })
 
-        loginViewModel.loginErrorCode.observe(viewLifecycleOwner, Observer { errorCode ->
+        loginErrorCode.observe(viewLifecycleOwner, Observer { errorCode ->
             binding.textTvErrorResultLogIn.apply {
                 visibility = View.VISIBLE
                 text = getString(errorCode)
             }
         })
     }
+}
 
     private fun setupListeners() {
         binding.apply {
@@ -64,6 +67,18 @@ class LoginFragment : Fragment() {
             btnTextTransitionForRegIn.setOnClickListener { navigate(R.id.welcomeFragment) }
             btnLogInApp.setOnClickListener {
                 loginViewModel.executeLogin(editTextEmailLogIn.text.toString(), editTextPasswordLogIn.text.toString())
+            }
+            btnShowPassword.setOnClickListener {
+                val passwordPlace = binding.editTextPasswordLogIn
+                if (passwordPlace.transformationMethod == HideReturnsTransformationMethod.getInstance()) {
+                    passwordPlace.transformationMethod = PasswordTransformationMethod.getInstance()
+                } else {
+                    passwordPlace.transformationMethod = HideReturnsTransformationMethod.getInstance()
+                }
+            }
+
+            btnTextTransitionForRegIn.setOnClickListener {
+                navigate(R.id.registrationFragment)
             }
         }
     }
