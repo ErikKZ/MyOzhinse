@@ -52,4 +52,5 @@
     <string name="error_invalid_credentials">Қате email немесе Құпия сөз</string>
     <string name="error_network">Желі қатесі</string>
     <string name="error_network_gateway">Gateway қатесі</string>
+    <string name="error_movie_response">Желіде ақау кетті</string>
 </resources>

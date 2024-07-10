@@ -1,4 +1,4 @@
-package kz.example.myozinshe
+package kz.example.myozinshe.presentation
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -9,6 +9,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import kz.example.myozinshe.R
 import kz.example.myozinshe.data.preference.PreferenceProvider
 import kz.example.myozinshe.databinding.FragmentSplashBinding
 import kz.example.myozinshe.domain.utils.provideNavigationHost
@@ -42,7 +43,7 @@ class SplashFragment : Fragment() {
         if (token == "without_token") {
             findNavController().navigate(R.id.welcomeFragment)
         } else if (token.isNullOrEmpty() ) {
-            findNavController().navigate(R.id.welcomeFragment)   //**********
+            findNavController().navigate(R.id.mainFragment)
         } else {
             findNavController().navigate(R.id.welcomeFragment)
         }

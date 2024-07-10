@@ -12,6 +12,7 @@ import android.widget.TextView
 import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import kz.example.myozinshe.R
 import kz.example.myozinshe.data.preference.PreferenceProvider
@@ -23,6 +24,8 @@ class LoginFragment : Fragment() {
     private lateinit var binding: FragmentLoginBinding
     private val loginViewModel: LoginViewModel by viewModels()
 
+    private lateinit var navController: NavController
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         binding = FragmentLoginBinding.inflate(inflater, container, false)
         return binding.root
@@ -30,6 +33,8 @@ class LoginFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        navController = findNavController()
         setupObservers()
         setupListeners()
     }
@@ -41,7 +46,7 @@ class LoginFragment : Fragment() {
                 saveToken(responseBody.accessToken)
                 saveLanguage("Қазақша")
             }
-            navigate(R.id.loginFragment)
+            navigate(R.id.mainFragment)
         })
 
         emailError.observe(viewLifecycleOwner, Observer { error ->
@@ -64,7 +69,7 @@ class LoginFragment : Fragment() {
     private fun setupListeners() {
         binding.apply {
             btnBackWelcomeFragment.setOnClickListener { navigate(R.id.welcomeFragment) }
-            btnTextTransitionForRegIn.setOnClickListener { navigate(R.id.welcomeFragment) }
+            btnTextTransitionForRegIn.setOnClickListener { navigate(R.id.registrationFragment) }
             btnLogInApp.setOnClickListener {
                 loginViewModel.executeLogin(editTextEmailLogIn.text.toString(), editTextPasswordLogIn.text.toString())
             }
@@ -77,14 +82,14 @@ class LoginFragment : Fragment() {
                 }
             }
 
-            btnTextTransitionForRegIn.setOnClickListener {
-                navigate(R.id.registrationFragment)
-            }
+//            btnTextTransitionForRegIn.setOnClickListener {
+//                navigate(R.id.registrationFragment)
+//            }
         }
     }
 
     private fun navigate(destinationId: Int) {
-        findNavController().navigate(destinationId)
+        navController.navigate(destinationId)
     }
 
     private fun updateUIForError(textView: TextView, error: Boolean?, errorMsgResId: Int, editText: EditText? = null, errorDrawableResId: Int? = null) {

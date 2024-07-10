@@ -1,6 +1,7 @@
 plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.jetbrainsKotlinAndroid)
+    alias(libs.plugins.navigationSafeArgs)
 }
 
 android {
@@ -52,6 +53,8 @@ dependencies {
     implementation(libs.dotsindicator)
     implementation(libs.adapter.guava)
     implementation(libs.converter.gson)
+    implementation(libs.shimmer)
+    implementation(libs.glide)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
