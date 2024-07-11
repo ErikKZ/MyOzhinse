@@ -10,13 +10,14 @@ import kz.example.myozinshe.domain.api.ApiInterface
 import kz.example.myozinshe.domain.api.ServiceBuilder
 import kz.example.myozinshe.domain.models.GenreResponse
 import kz.example.myozinshe.domain.models.MainPageModel
+import kz.example.myozinshe.domain.models.MoviesMain
 import kz.example.myozinshe.domain.models.MoviesMainItem
 
 class MainViewModel: ViewModel() {
     val response = ServiceBuilder.buildService(ApiInterface::class.java)
 
-    private val _mainMovie = MutableLiveData<MainPageModel>()
-    val mainMovie: LiveData<MainPageModel> = _mainMovie
+    private val _mainMovie = MutableLiveData<MoviesMain>()
+    val mainMovie: LiveData<MoviesMain> = _mainMovie
 
     private val _mainMovy = MutableLiveData<MainPageModel>()
     val mainMovy: LiveData<MainPageModel> = _mainMovy

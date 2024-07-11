@@ -4,5 +4,5 @@ import kz.example.myozinshe.domain.models.MainPageModelItem
 import kz.example.myozinshe.domain.models.MoviesMainItem
 
 interface MainItemClick {
-    fun onItemClick(item: MainPageModelItem)
+    fun onItemClick(item: MoviesMainItem)
 }

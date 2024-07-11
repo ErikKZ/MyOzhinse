@@ -53,4 +53,5 @@
     <string name="error_network">Желі қатесі</string>
     <string name="error_network_gateway">Gateway қатесі</string>
     <string name="error_movie_response">Желіде ақау кетті</string>
+    <string name="error_network_unavailable">Желіде ақау бар, ақпарат жүктелмеуде</string>
 </resources>

@@ -6,6 +6,7 @@ import kz.example.myozinshe.domain.models.LoginRequest
 import kz.example.myozinshe.domain.models.LoginResponse
 import kz.example.myozinshe.domain.models.MainPageModel
 import kz.example.myozinshe.domain.models.MovieIdModel
+import kz.example.myozinshe.domain.models.MoviesMain
 import kz.example.myozinshe.domain.models.SearchResponseModel
 import kz.example.myozinshe.domain.models.SeriesModel
 import kz.example.myozinshe.domain.models.UserInfo
@@ -104,6 +105,6 @@ interface ApiInterface {
     @GET("/core/V1/movies_main")        //**
     suspend fun moviesMain(
         @Header("Authorization") token: String
-    ): MainPageModel
+    ): MoviesMain
 
 }

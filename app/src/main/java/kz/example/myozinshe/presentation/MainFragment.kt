@@ -13,6 +13,7 @@ import kz.example.myozinshe.data.preference.PreferenceProvider
 import kz.example.myozinshe.databinding.FragmentMainBinding
 import kz.example.myozinshe.domain.models.GenreResponseItem
 import kz.example.myozinshe.domain.models.MainPageModelItem
+import kz.example.myozinshe.domain.models.MoviesMainItem
 import kz.example.myozinshe.domain.models.Movy
 import kz.example.myozinshe.domain.utils.CustomDividerItemDecoration
 import kz.example.myozinshe.domain.utils.provideNavigationHost
@@ -64,15 +65,14 @@ class MainFragment : Fragment() {
             }
         }
 
-        val token = PreferenceProvider(requireContext()).getToken()!!
-
         setupUI()
         observe()
 
-        mainMoviePoster(token)
+        mainMoviePoster()
     }
 
-    private fun mainMoviePoster(token: String) {
+    private fun mainMoviePoster() {
+        val token = PreferenceProvider(requireContext()).getToken()!!
 
         mainViewModel.movie(token)
         mainViewModel.getMovieOzinshe(token)
@@ -84,7 +84,111 @@ class MainFragment : Fragment() {
 
     }
     private fun observe() {
-        TODO("Not yet implemented")
+
+        mainViewModel.mainMovie.observe(viewLifecycleOwner) {
+            mainMovieAdapter.submitList(it)
+
+            if (it.isNullOrEmpty()) {
+                with(binding) {
+                    textTVERROR?.visibility=View.VISIBLE
+                    imgERRORView?.visibility =View.VISIBLE
+                    nestedScroll?.visibility= View.GONE
+                }
+            } else {
+                with(binding) {
+                    shimmerInMainFragment?.stopShimmer()
+                    shimmerInMainFragment?.visibility =View.GONE
+                    constrainMainFragment?.visibility= View.VISIBLE
+                }
+            }
+        }
+
+        mainViewModel.mainMovy.observe(viewLifecycleOwner) {mainPageModel ->
+            val movyes = mainPageModel.flatMap { it.movies }
+            mainPageCategoryAdapter.submitList(movyes)
+
+            if (!movyes.isNullOrEmpty()) {
+                with(binding) {
+                    shimmerInMainFragmentAdd?.stopShimmer()
+                    shimmerInMainFragmentAdd?.visibility = View.GONE
+
+                    btnCategoryAllMovie1?.visibility = View.VISIBLE
+                    btnCategoryAllMovie1?.setOnClickListener { t->
+                        TODO("Argument navigation")
+                    }
+
+                    textTvCategoryTitle1?.text = mainPageModel[0].categoryName
+                }
+            }
+        }
+
+        mainViewModel.mainMult.observe(viewLifecycleOwner) {mainPageModel ->
+            val movyes = mainPageModel.flatMap { it.movies }
+            mainPageCategoryAdapter.submitList(movyes)
+
+            if (!movyes.isNullOrEmpty()) {
+                with(binding) {
+                    btnCategoryAllMovie4?.visibility = View.VISIBLE
+                    btnCategoryAllMovie4?.setOnClickListener { t->
+                        TODO("Argument navigation")
+                    }
+
+                    textTvCategoryTitle4?.text = mainPageModel[2].categoryName
+                }
+            }
+        }
+
+        mainViewModel.mainMultSerial.observe(viewLifecycleOwner) {mainPageModel ->
+            val movyes = mainPageModel.flatMap { it.movies }
+            mainPageCategoryAdapter.submitList(movyes)
+
+            if (!movyes.isNullOrEmpty()) {
+                with(binding) {
+                    btnCategoryAllMovie5?.visibility = View.VISIBLE
+                    btnCategoryAllMovie5?.setOnClickListener { t->
+                        TODO("Argument navigation")
+                    }
+
+                    textTvCategoryTitle5?.text = mainPageModel[3].categoryName
+                }
+            }
+        }
+
+        mainViewModel.mainSitcom.observe(viewLifecycleOwner) {mainPageModel ->
+            val movyes = mainPageModel.flatMap { it.movies }
+            mainPageCategoryAdapter.submitList(movyes)
+
+            if (!movyes.isNullOrEmpty()) {
+                with(binding) {
+                    btnCategoryAllMovie6?.visibility = View.VISIBLE
+                    btnCategoryAllMovie6?.setOnClickListener { t->
+                        TODO("Argument navigation")
+                    }
+
+                    textTvCategoryTitle6?.text = mainPageModel[4].categoryName
+                }
+            }
+        }
+
+        mainViewModel.mainGenre.observe(viewLifecycleOwner) {
+            genreMainAdapter.submitList(it)
+
+            if (!it.isNullOrEmpty()) {
+                with(binding) {
+                    btnCategoryAllMovie3?.visibility = View.VISIBLE
+                    textTvCategoryTitle3?.text = getString(R.string.ChooceGenre)
+                }
+            }
+        }
+
+        mainViewModel.errorMessage.observe(viewLifecycleOwner) {
+            with(binding) {
+                textTVERROR?.visibility = View.VISIBLE
+                imgERRORView?.visibility = View.VISIBLE
+                recyclerViewPlaceForMainMovies?.visibility = View.VISIBLE  // ПРОВРЕИТЬ когда бэк не подключен
+                nestedScroll?.visibility = View.GONE
+            }
+        }
     }
 
     private fun setupUI() {
@@ -96,7 +200,7 @@ class MainFragment : Fragment() {
         }
 
         mainMovieAdapter.onTouchItem(object : MainItemClick {
-            override fun onItemClick(item: MainPageModelItem) {
+            override fun onItemClick(item: MoviesMainItem) {
 //                val action = FragmentMainDirections.actionFragmentMainToAboutMovieFragment(item.id)
 //                findNavController().navigate(action)
             }
@@ -138,7 +242,7 @@ class MainFragment : Fragment() {
         genreMainAdapter = GenreMainAdapter()
 
         with(binding.rcViewCategoryCategories) {
-            adapter = mainPageCategoryAdapter
+            adapter = genreMainAdapter
             addItemDecoration(CustomDividerItemDecoration(requireContext().getDrawable(R.drawable.divider_1dp_grey)!!))
         }
 
@@ -166,4 +270,9 @@ class MainFragment : Fragment() {
             additionalToolBarConfig(false, btnExitVisible = false, titleVisible = false, title = "")
         }
     }
+
+//    override fun onDestroyView() {
+//        super.onDestroyView()
+//        binding = null
+//    }
 }

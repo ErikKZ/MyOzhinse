@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import kz.example.myozinshe.databinding.ItemMainMovieRcBinding
 import kz.example.myozinshe.domain.models.MainPageModelItem
+import kz.example.myozinshe.domain.models.MoviesMain
 import kz.example.myozinshe.domain.models.MoviesMainItem
 import kz.example.myozinshe.presentation.interfaces.MainItemClick
 
@@ -19,26 +20,26 @@ class MainMovieAdapter : RecyclerView.Adapter<MainMovieAdapter.MainMovieHolder>(
         this.onMainItemClick = listener
     }
 
-    private val diffCallBack = object : DiffUtil.ItemCallback<MainPageModelItem>() {
-        override fun areItemsTheSame(oldItem: MainPageModelItem, newItem: MainPageModelItem): Boolean {
+    private val diffCallBack = object : DiffUtil.ItemCallback<MoviesMainItem>() {
+        override fun areItemsTheSame(oldItem: MoviesMainItem, newItem: MoviesMainItem): Boolean {
             return oldItem.id == newItem.id
         }
 
-        override fun areContentsTheSame(oldItem: MainPageModelItem, newItem: MainPageModelItem): Boolean {
+        override fun areContentsTheSame(oldItem: MoviesMainItem, newItem: MoviesMainItem): Boolean {
             return oldItem == newItem
         }
     }
 
     private val differ = AsyncListDiffer(this, diffCallBack)
 
-    fun submit(list: ArrayList<MainPageModelItem>) {
+    fun submitList(list: MoviesMain) {
         differ.submitList(list)
     }
 
     inner class MainMovieHolder(private val binding: ItemMainMovieRcBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun bindItem(mainItem: MainPageModelItem) {
+        fun bindItem(mainItem: MoviesMainItem) {
             with(binding) {
                 textTvMainMovieTittle.text = mainItem.movie.name
                 textTvMainMovieDescription.text = mainItem.movie.description
