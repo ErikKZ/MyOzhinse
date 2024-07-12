@@ -19,6 +19,7 @@ class MainPageCategoryAdapter :
         this.onItemClickListener
     }
 
+
     private val diffCallBack = object : DiffUtil.ItemCallback<Movy>() {
         override fun areItemsTheSame(oldItem: Movy, newItem: Movy): Boolean {
             return oldItem.id == newItem.id
