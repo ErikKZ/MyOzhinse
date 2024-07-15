@@ -49,21 +49,25 @@ class SplashFragment : Fragment() {
         }
     }
 
+    private fun setupNavigationHost() {
+        provideNavigationHost()?.apply {
+            setNavigationVisibility(false)
+            additionalToolBarConfig(
+                toolbarVisible = false,
+                btnBackVisible = false,
+                btnExitVisible = false,
+                title = ""
+            )
+        }
+    }
     override fun onResume() {
         super.onResume()
-        updateNavigationHost()
+        setupNavigationHost()
     }
 
     override fun onPause() {
         super.onPause()
-        updateNavigationHost()
-    }
-
-    private fun updateNavigationHost() {
-        provideNavigationHost()?.apply {
-            setNavigationVisibility(false)
-            setNavigationToolBar(false,true)
-        }
+        setupNavigationHost()
     }
 
 

@@ -16,11 +16,5 @@ data class UserInfo(
     val phoneNumber: String, // string
     @SerializedName("user")
     val user: User
-) {
-    data class User(
-        @SerializedName("email")
-        val email: String, // string
-        @SerializedName("id")
-        val id: Int // 0
-    )
-}
+)
+

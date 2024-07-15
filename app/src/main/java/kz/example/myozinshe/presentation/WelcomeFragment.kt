@@ -1,10 +1,10 @@
 package kz.example.myozinshe.presentation
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import androidx.viewpager2.widget.ViewPager2
@@ -34,16 +34,17 @@ class WelcomeFragment : Fragment() {
         navController = findNavController()
         setupViewPager()
 
-        val clickListener = View.OnClickListener { transactionInLogIn() }  // на луюбую кнокпу на View
-        binding.btnSkipWelcomeFragment.setOnClickListener (clickListener)
-        binding.btnNextInLogInPage.setOnClickListener (clickListener)
+        val clickListener =
+            View.OnClickListener { transactionInLogIn() }  // на луюбую кнокпу на View
+        binding.btnSkipWelcomeFragment.setOnClickListener(clickListener)
+        binding.btnNextInLogInPage.setOnClickListener(clickListener)
     }
 
-    private fun transactionInLogIn(){
+    private fun transactionInLogIn() {
         navController.navigate(R.id.loginFragment)       //**********
     }
 
-    private fun setupViewPager(){
+    private fun setupViewPager() {
         val adapter = WelcomePageAdapter()
         adapter.submitList(WelcomePageInfoList.welcomePageSlidesInfoList)
 
@@ -56,31 +57,34 @@ class WelcomeFragment : Fragment() {
     }
 
 
- private val pager2CallBack = object : ViewPager2.OnPageChangeCallback() {
-    override fun onPageSelected(position: Int) {
-        val isLastPage = position == WelcomePageInfoList.welcomePageSlidesInfoList.size - 1
-        binding.btnSkipWelcomeFragment.visibility = if (isLastPage) View.GONE else View.VISIBLE
-        binding.btnNextInLogInPage.visibility = if (isLastPage) View.VISIBLE else View.GONE
+    private val pager2CallBack = object : ViewPager2.OnPageChangeCallback() {
+        override fun onPageSelected(position: Int) {
+            val isLastPage = position == WelcomePageInfoList.welcomePageSlidesInfoList.size - 1
+            binding.btnSkipWelcomeFragment.visibility = if (isLastPage) View.GONE else View.VISIBLE
+            binding.btnNextInLogInPage.visibility = if (isLastPage) View.VISIBLE else View.GONE
+        }
+
     }
 
-}
-
+    private fun setupNavigationHost() {
+        provideNavigationHost()?.apply {
+            setNavigationVisibility(false)
+            additionalToolBarConfig(
+                toolbarVisible = false,
+                btnBackVisible = false,
+                btnExitVisible = false,
+                title = ""
+            )
+        }
+    }
 
     override fun onResume() {
         super.onResume()
-        provideNavigationHost()?.apply {
-            setNavigationVisibility(false)
-            setNavigationToolBar(false,true)
-        }
+        setupNavigationHost()
     }
 
     override fun onPause() {
         super.onPause()
-        provideNavigationHost()?.apply {
-            setNavigationVisibility(false)
-            setNavigationToolBar(false,true)
-        }
+        setupNavigationHost()
     }
-
-
 }

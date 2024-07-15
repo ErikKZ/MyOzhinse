@@ -1,0 +1,140 @@
+package kz.example.myozinshe.presentation
+
+import android.content.Intent
+import android.os.Build
+import android.os.Bundle
+import androidx.fragment.app.Fragment
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import androidx.fragment.app.FragmentTransaction
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
+import androidx.navigation.NavController
+import androidx.navigation.fragment.findNavController
+import kz.example.myozinshe.R
+import kz.example.myozinshe.data.preference.PreferenceProvider
+import kz.example.myozinshe.databinding.FragmentProfileBinding
+import kz.example.myozinshe.domain.models.SelectLanguageModel
+import kz.example.myozinshe.domain.models.UserInfo
+import kz.example.myozinshe.domain.utils.provideNavigationHost
+import kz.example.myozinshe.presentation.viewModel.ProfileViewModel
+
+class ProfileFragment : Fragment() {
+    private var binding: FragmentProfileBinding? = null
+    private val profileViewModel: ProfileViewModel by viewModels()
+
+    private lateinit var navController: NavController
+
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        binding = FragmentProfileBinding.inflate(inflater, container, false)
+        return binding?.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        navController = findNavController()
+        profileViewModel.systemLanguage()
+
+//        val transaction: FragmentTransaction = parentFragmentManager.beginTransaction()
+//        if (Build.VERSION.SDK_INT >= 26) {
+//            transaction.setReorderingAllowed(false)
+//        }
+//        transaction.detach(this).attach(this).commit()
+
+        val token = PreferenceProvider(requireContext()).getToken()!!
+        profileViewModel.userInfo(token)
+
+        binding?.run {
+            btnChangePassword1.setOnClickListener {
+                navController.navigate(R.id.mainFragment)  //*********  passwordReFragment
+            }
+            btnChangePassword2.setOnClickListener {
+                navController.navigate(R.id.mainFragment)  //************** passwordReFragment
+            }
+//            btnSelectLanguageIcon?.performClick()
+
+            btnImgJekeDerekter?.setOnClickListener {
+                navController.navigate(R.id.infoFragment)
+            }
+
+            btnInfoTransaction?.setOnClickListener {
+                navController.navigate(R.id.infoFragment)
+            }
+
+            btnSelectLanguageIcon?.setOnClickListener {
+                SelectLanguage().show(parentFragmentManager,"")
+            }
+
+            textTvSelectLanguageText.setOnClickListener {
+                SelectLanguage().show(parentFragmentManager,"")
+            }
+        }
+
+        setObserve()
+    }
+
+    private fun setObserve(){
+        profileViewModel.userInfo.observe(viewLifecycleOwner, :: handleUserInfo)
+        profileViewModel.errorCode.observe(viewLifecycleOwner, :: handleErrorCode)
+        profileViewModel.languageSystem.observe(viewLifecycleOwner, :: handleLanguageSystem)
+        profileViewModel.isDarkModeEnabled.observe(viewLifecycleOwner, :: handleIsDarkModeEnabled)
+    }
+    private fun handleIsDarkModeEnabled(flagDark: Boolean){
+        binding?.dayNightSwitch?.isChecked = flagDark
+//        activity?.recreate()
+
+
+        binding?.dayNightSwitch?.setOnCheckedChangeListener(null)
+        binding?.dayNightSwitch?.setOnCheckedChangeListener {_, isEnabled ->
+            profileViewModel.toggleDarkMode(isEnabled)
+//            activity?.recreate()
+        }
+    }
+
+    private fun handleLanguageSystem(item: SelectLanguageModel){
+        if (item != null) {
+            binding?.textTvSelectLanguageText?.text = item.language
+        } else {
+            binding?.textTvSelectLanguageText?.text = "Қазақша"
+        }
+    }
+    private fun handleErrorCode(item: Int){
+        binding?.textTvEmailUser?.text = getString(item)
+    }
+
+    private fun handleUserInfo(item: UserInfo){
+        binding?.textTvEmailUser?.text = item.user.email
+    }
+    private fun setupNavigationHost() {
+        provideNavigationHost()?.apply {
+            setNavigationVisibility(true)
+            additionalToolBarConfig(
+                toolbarVisible = true,
+                btnBackVisible = true,
+                btnExitVisible = false,
+                title = getString(R.string.MyProfile)
+            )
+            onClickListener(R.id.mainFragment)   //******************
+        }
+    }
+    override fun onResume() {
+        super.onResume()
+        setupNavigationHost()
+    }
+
+    override fun onPause() {
+        super.onPause()
+        setupNavigationHost()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        binding = null
+    }
+
+}

@@ -3,7 +3,7 @@ package kz.example.myozinshe.domain.models
 
 import com.google.gson.annotations.SerializedName
 
-data class Movie(
+data class MovieInfoResponse(
     @SerializedName("categories")
     val categories: List<Category>,
     @SerializedName("categoryAges")

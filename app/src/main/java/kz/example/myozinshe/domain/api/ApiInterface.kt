@@ -1,11 +1,13 @@
 package kz.example.myozinshe.domain.api
 
 import kz.example.myozinshe.domain.models.CategoryMovieResponse
+import kz.example.myozinshe.domain.models.FavoriteModelItem
 import kz.example.myozinshe.domain.models.GenreResponse
 import kz.example.myozinshe.domain.models.LoginRequest
 import kz.example.myozinshe.domain.models.LoginResponse
 import kz.example.myozinshe.domain.models.MainPageModel
 import kz.example.myozinshe.domain.models.MovieIdModel
+import kz.example.myozinshe.domain.models.MovieInfoResponse
 import kz.example.myozinshe.domain.models.MoviesMain
 import kz.example.myozinshe.domain.models.SearchResponseModel
 import kz.example.myozinshe.domain.models.SeriesModel
@@ -64,11 +66,11 @@ interface ApiInterface {
         @Body movieId: MovieIdModel
     ): MovieIdModel
 
-    @HTTP(method = "DELETE", path = "/core/V1/favorite", hasBody = true)
+    @HTTP(method = "DELETE", path = "/core/V1/favorite/", hasBody = true)
     suspend fun deleteAtFavorite(
         @Header("Authorization") token: String,
         @Body movieId: MovieIdModel
-    ): Response<Unit>
+    )
 
     @GET("/core/V1/seasson/{movieId}")
     suspend fun getSeries(
@@ -80,7 +82,7 @@ interface ApiInterface {
     suspend fun movieWithId(
         @Header("Authorization") token: String,
         @Path("id") id: Int
-    ): MovieIdModel
+    ): MovieInfoResponse
 
     @GET("/core/V1/genres")
     suspend fun getGenre(
@@ -91,11 +93,10 @@ interface ApiInterface {
     suspend fun moviesMainPage(
         @Header("Authorization") token: String
     ): MainPageModel
-
-    @GET("/core/V1/favorite")
-    suspend fun getFavorite(
+    @GET("/core/V1/favorite/")
+    suspend fun getFavoriteMovies(
         @Header("Authorization") token: String
-    ): MainPageModel
+    ): List<FavoriteModelItem>
 
     @GET("/core/V1/user/profile")
     suspend fun getUserInfo(

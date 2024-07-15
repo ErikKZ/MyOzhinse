@@ -109,19 +109,24 @@ class RegistrationFragment : Fragment() {
         }
     }
 
-    override fun onResume() {
-        super.onResume()
+    private fun setupNavigationHost() {
         provideNavigationHost()?.apply {
             setNavigationVisibility(false)
-            setNavigationToolBar(false,true)
+            additionalToolBarConfig(
+                toolbarVisible = false,
+                btnBackVisible = false,
+                btnExitVisible = false,
+                title = ""
+            )
         }
+    }
+    override fun onResume() {
+        super.onResume()
+        setupNavigationHost()
     }
 
     override fun onPause() {
         super.onPause()
-        provideNavigationHost()?.apply {
-            setNavigationVisibility(false)
-            setNavigationToolBar(false,true)
-        }
+        setupNavigationHost()
     }
 }

@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/bottomSheetConstraint"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/about_film_style_top_radius_32dp"
+        android:orientation="vertical"
+        android:paddingBottom="8dp">
+
+        <View
+            android:id="@+id/divider_sheet"
+            android:layout_width="64dp"
+            android:layout_height="5dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="21dp"
+            android:background="@drawable/view_bottom_sheet" />
+
+        <TextView
+            android:id="@+id/select_language_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24sp"
+            android:layout_marginTop="32dp"
+            android:layout_marginBottom="8dp"
+            android:fontFamily="@font/sf_bold"
+            android:text="@string/language"
+            android:textColor="?attr/colorOnPrimary"
+            android:textSize="24sp" />
+
+        <LinearLayout
+            android:id="@+id/btnSelectEnglish"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginEnd="24dp"
+            android:orientation="horizontal"
+            android:paddingTop="20dp"
+            android:paddingBottom="20dp">
+
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="@font/sf_semibold"
+                android:text="English"
+                android:textColor="?attr/colorOnPrimary"
+                android:textSize="16sp" />
+
+            <View
+                android:id="@+id/imgIconBtnSelectEnglish"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:background="@drawable/bottom_sheet_check_icon" />
+        </LinearLayout>
+
+        <View
+            android:id="@+id/view1"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginEnd="24dp"
+            android:background="?attr/strokeColor" />
+
+        <LinearLayout
+            android:id="@+id/btnSelectQazaq"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginEnd="24dp"
+            android:orientation="horizontal"
+            android:paddingTop="20dp"
+            android:paddingBottom="20dp">
+
+            <TextView
+                android:id="@+id/textView4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="@font/sf_semibold"
+                android:text="Қазақша"
+                android:textColor="?attr/colorOnPrimary"
+                android:textSize="16sp" />
+
+            <View
+                android:id="@+id/imgIconBtnSelectQazaq"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:background="@drawable/bottom_sheet_check_icon" />
+        </LinearLayout>
+
+        <View
+            android:id="@+id/view2"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginEnd="24dp"
+            android:background="?attr/strokeColor" />
+
+        <LinearLayout
+            android:id="@+id/btnSelectRussian"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginEnd="24dp"
+            android:orientation="horizontal"
+            android:paddingTop="20dp"
+            android:paddingBottom="20dp">
+
+            <TextView
+                android:id="@+id/textView5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="@font/sf_semibold"
+                android:text="Русский"
+                android:textColor="?attr/colorOnPrimary"
+                android:textSize="16sp" />
+
+            <View
+                android:id="@+id/imgIconBtnSelectRussian"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:background="@drawable/bottom_sheet_check_icon" />
+        </LinearLayout>
+
+    </LinearLayout>
+</LinearLayout>

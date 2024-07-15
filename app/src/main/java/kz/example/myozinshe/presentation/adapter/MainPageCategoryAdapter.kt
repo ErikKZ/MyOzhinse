@@ -9,15 +9,17 @@ import com.bumptech.glide.Glide
 import kz.example.myozinshe.databinding.ItemMainCategoryRcBinding
 import kz.example.myozinshe.domain.models.Movy
 import kz.example.myozinshe.presentation.interfaces.ClickInterfaceMain
+import kz.example.myozinshe.presentation.interfaces.ItemOnClickChooseGenre
 
 class MainPageCategoryAdapter :
     RecyclerView.Adapter<MainPageCategoryAdapter.MainPageCategoryViewHolder>() {
 
-    private val onItemClickListener: ClickInterfaceMain? = null
+    private var onItemClickListener: ClickInterfaceMain? = null
 
     fun onTouchItem(listener: ClickInterfaceMain) {
-        this.onItemClickListener
+        this.onItemClickListener = listener
     }
+
 
 
     private val diffCallBack = object : DiffUtil.ItemCallback<Movy>() {

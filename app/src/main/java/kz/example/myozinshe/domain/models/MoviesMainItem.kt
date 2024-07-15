@@ -10,7 +10,7 @@ data class MoviesMainItem(
     @SerializedName("link")
     val link: String, // string
     @SerializedName("movie")
-    val movie: Movie,
+    val movie: MovieInfoResponse,
     @SerializedName("sortOrder")
     val sortOrder: Int // 0
 )

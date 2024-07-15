@@ -1,7 +1,14 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <!--    <style name="Base.Theme.Ozinshe." parent="Theme.MaterialComponents.NoActionBar">-->
+    <!--      <style name="Base.Theme.Ozinshe." parent="Theme.MaterialComponents.NoActionBar">-->
+    <style name="Theme.MyOzinshe" parent="Theme.MaterialComponents.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="android:windowFullscreen">true</item>
 
-    <style name="Theme.MyOzinshe" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Добавление атрибутов темы -->
+        <!-- Primary brand color. -->
+
         <item name="colorPrimary">@color/white</item>
         <item name="colorPrimaryVariant">@color/white</item>
         <item name="backgroundColor">@color/white</item>
@@ -10,8 +17,8 @@
         <item name="track">@color/grey_300</item>
         <!-- Text -->
         <item name="colorOnPrimary">@color/grey_900</item>
-<!--        <item name="backgroundColorOnSwitchOff">@color/grey_100</item>-->
-<!--        <item name="backgroundColorOnSwitchOn">@color/primary_400</item>-->
+        <item name="colorTertiary">@color/grey_100</item>
+        <!--        <item name="backgroundColorOnSwitchOn">@color/primary_400</item>-->
         <!-- Secondary brand color. -->
 
         <item name="colorSecondary">@color/grey_100</item>
@@ -40,8 +47,8 @@
         <item name="track">@color/grey_300</item>
         <!-- Text -->
         <item name="colorOnPrimary">@color/grey_900</item>
-<!--        <item name="backgroundColorOnSwitchOff">@color/grey_100</item>-->
-<!--        <item name="backgroundColorOnSwitchOn">@color/primary_400</item>-->
+        <!--        <item name="colorTertiary">@color/grey_100</item>-->
+        <!--        <item name="backgroundColorOnSwitchOn">@color/primary_400</item>-->
         <!-- Secondary brand color. -->
 
         <item name="colorSecondary">@color/grey_100</item>

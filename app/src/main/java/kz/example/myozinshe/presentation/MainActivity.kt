@@ -6,12 +6,12 @@ import android.os.Build
 import android.os.Bundle
 import android.view.WindowInsetsController
 import android.view.WindowManager
-import androidx.annotation.ColorInt
-import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.view.isGone
 import androidx.core.view.isVisible
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.LifecycleRegistry
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
@@ -26,12 +26,9 @@ class MainActivity : AppCompatActivity(), NavigationHostProvider {
 
     private lateinit var binding: ActivityMainBinding
 
-    @RequiresApi(Build.VERSION_CODES.R)
+    //    @RequiresApi(Build.VERSION_CODES.R)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        binding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(binding.root)
 
         val isDarkModeEnabled = PreferenceProvider(this).getDarkModeEnabledState()
 
@@ -43,6 +40,9 @@ class MainActivity : AppCompatActivity(), NavigationHostProvider {
             }
         )
 
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
         val language = PreferenceProvider(this).getLanguage()
 
         if (language == "English" || language == "Қазақша" || language == "Русский") {
@@ -53,6 +53,7 @@ class MainActivity : AppCompatActivity(), NavigationHostProvider {
 
         val navController = findNavController(R.id.nav_host_fragment)
         binding.bottomNavigationBarMainActivity?.setupWithNavController(navController)
+        binding?.bottomNavigationBarMainActivity?.apply { itemIconTintList = null }
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
             window.insetsController?.setSystemBarsAppearance(
@@ -63,7 +64,7 @@ class MainActivity : AppCompatActivity(), NavigationHostProvider {
             window.addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)
         }
 
-        window.statusBarColor= Color.TRANSPARENT
+        window.statusBarColor = Color.TRANSPARENT
 
     }
 
@@ -85,34 +86,54 @@ class MainActivity : AppCompatActivity(), NavigationHostProvider {
         binding.bottomNavigationBarMainActivity?.isVisible = visible
     }
 
-    override fun setNavigationToolBar(visible: Boolean, isGone: Boolean) {
-        val toolbarUpnavBinding = binding?.linerLayoutToolbar as ToolbarUpnavBinding
-        val toolbar = toolbarUpnavBinding.toolbarInfo
-
-        toolbar.isVisible = visible
-        toolbar.isGone = isGone
-    }
-
     override fun additionalToolBarConfig(
+        toolbarVisible: Boolean,
         btnBackVisible: Boolean,
         btnExitVisible: Boolean,
-        titleVisible: Boolean,
         title: String
     ) {
         val toolbarUpnavBinding = binding?.linerLayoutToolbar as ToolbarUpnavBinding
+        val toolbar = toolbarUpnavBinding.toolbarInfo
         val btnBack = toolbarUpnavBinding.btnBack
         val btnExit = toolbarUpnavBinding.btnExit
         val titleTextView = toolbarUpnavBinding.titleToolbar
 
+        toolbar.isVisible = toolbarVisible
+        toolbar.isGone = !toolbarVisible
         btnBack.isVisible = btnBackVisible
         btnExit.isVisible = btnExitVisible
-        titleTextView.isVisible = titleVisible
+        titleTextView.isVisible = title.isNotEmpty()
         titleTextView.text = title
     }
 
+//    override fun setNavigationToolBar(visible: Boolean, isGone: Boolean) {
+//        val toolbarUpnavBinding = binding?.linerLayoutToolbar as ToolbarUpnavBinding
+//        val toolbar = toolbarUpnavBinding.toolbarInfo
+//
+//        toolbar.isVisible = visible
+//        toolbar.isGone = isGone
+//    }
+//
+//    override fun additionalToolBarConfig(
+//        btnBackVisible: Boolean,
+//        btnExitVisible: Boolean,
+//        titleVisible: Boolean,
+//        title: String
+//    ) {
+//        val toolbarUpnavBinding = binding?.linerLayoutToolbar as ToolbarUpnavBinding
+//        val btnBack = toolbarUpnavBinding.btnBack
+//        val btnExit = toolbarUpnavBinding.btnExit
+//        val titleTextView = toolbarUpnavBinding.titleToolbar
+//
+//        btnBack.isVisible = btnBackVisible
+//        btnExit.isVisible = btnExitVisible
+//        titleTextView.isVisible = titleVisible
+//        titleTextView.text = title
+//    }
+
     override fun onClickListener(id: Int) {
         val toolbarUpnavBinding = binding?.linerLayoutToolbar as ToolbarUpnavBinding
-        toolbarUpnavBinding.btnBack.setOnClickListener{
+        toolbarUpnavBinding.btnBack.setOnClickListener {
             findNavController(R.id.nav_host_fragment).navigate(id)
         }
     }
@@ -120,7 +141,7 @@ class MainActivity : AppCompatActivity(), NavigationHostProvider {
     override fun showBottomSheetExit(unit: BottomSheetDialogFragment) {
         val toolbarUpnavBinding = binding?.linerLayoutToolbar as ToolbarUpnavBinding
         toolbarUpnavBinding.btnExit.setOnClickListener {
-            unit.show(supportFragmentManager,"")
+            unit.show(supportFragmentManager, "")
         }
     }
 }
