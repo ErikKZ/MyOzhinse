@@ -59,7 +59,8 @@ class InfoFragment : Fragment() {
     }
 
     private fun handleIsUserUpdate(flagUpdate: Boolean) {
-        Toast.makeText(requireContext(),"Data update",Toast.LENGTH_SHORT).show()
+        Toast.makeText(requireContext(),getText(R.string.message_info_update),Toast.LENGTH_SHORT).show()
+        navController.navigate(R.id.profileFragment)
     }
     private fun handleUserInfo(userInfo: UserInfo) {
         var birthDate: String = ""
@@ -145,7 +146,6 @@ class InfoFragment : Fragment() {
                     phoneNumber = phoneNumber
                 ))
 
-                navController.navigate(R.id.profileFragment)
             }
         }
     }

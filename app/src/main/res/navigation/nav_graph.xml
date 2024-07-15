@@ -146,4 +146,13 @@
             android:id="@+id/action_infoFragment_to_profileFragment"
             app:destination="@id/profileFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/rePasswordFragment"
+        android:name="kz.example.myozinshe.presentation.RePasswordFragment"
+        android:label="fragment_re_password"
+        tools:layout="@layout/fragment_re_password" >
+        <action
+            android:id="@+id/action_rePasswordFragment_to_profileFragment"
+            app:destination="@id/profileFragment" />
+    </fragment>
 </navigation>

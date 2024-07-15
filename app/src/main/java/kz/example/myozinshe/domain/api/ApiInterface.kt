@@ -1,6 +1,7 @@
 package kz.example.myozinshe.domain.api
 
 import kz.example.myozinshe.domain.models.CategoryMovieResponse
+import kz.example.myozinshe.domain.models.ChangePasswordRequest
 import kz.example.myozinshe.domain.models.FavoriteModelItem
 import kz.example.myozinshe.domain.models.GenreResponse
 import kz.example.myozinshe.domain.models.LoginRequest
@@ -54,11 +55,11 @@ interface ApiInterface {
         @Body requestUserInfo: UserInfoRequest
     ): UserInfo
 
-//    @HTTP(method = "PUT", path = "/core/V1/user/profile/", hasBody = true)   // не работает в приложении
-//    suspend fun updateUserPassword(
-//        @Header("Authorization") token: String,
-//        @Body requestUserInfo: ChangePasswordRequest
-//    ): UserInfo  //***********
+    @HTTP(method = "PUT", path = "/core/V1/user/profile/changePassword", hasBody = true)   // не работает в приложении
+    suspend fun updateUserPassword(
+        @Header("Authorization") token: String,
+        @Body requestUserInfo: ChangePasswordRequest
+    ): UserInfo  //***********
 
     @POST("/core/V1/favorite")
     suspend fun addToFavorite(

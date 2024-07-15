@@ -48,46 +48,34 @@ class ProfileFragment : Fragment() {
 
         val token = PreferenceProvider(requireContext()).getToken()!!
         profileViewModel.userInfo(token)
-
-        binding?.run {
-            btnChangePassword1.setOnClickListener {
-                navController.navigate(R.id.mainFragment)  //*********  passwordReFragment
-            }
-            btnChangePassword2.setOnClickListener {
-                navController.navigate(R.id.mainFragment)  //************** passwordReFragment
-            }
-//            btnSelectLanguageIcon?.performClick()
-
-            btnImgJekeDerekter?.setOnClickListener {
-                navController.navigate(R.id.infoFragment)
-            }
-
-            btnInfoTransaction?.setOnClickListener {
-                navController.navigate(R.id.infoFragment)
-            }
-
-            btnSelectLanguageIcon?.setOnClickListener {
-                SelectLanguage().show(parentFragmentManager,"")
-            }
-
-            textTvSelectLanguageText.setOnClickListener {
-                SelectLanguage().show(parentFragmentManager,"")
-            }
-        }
-
+        setupUI()
         setObserve()
     }
 
+    private fun setupUI() {
+        binding?.apply {
+            listOf(btnChangePassword1, btnChangePassword2).forEach { button ->
+                button.setOnClickListener { navController.navigate(R.id.rePasswordFragment) }
+            }
+            listOf(btnImgJekeDerekter, btnInfoTransaction).forEach { button ->
+                button.setOnClickListener { navController.navigate(R.id.infoFragment) }
+            }
+            listOf(btnSelectLanguageIcon, textTvSelectLanguageText).forEach { view ->
+                view.setOnClickListener { SelectLanguage().show(parentFragmentManager, "") }
+            }
+        }
+    }
+
     private fun setObserve(){
-        profileViewModel.userInfo.observe(viewLifecycleOwner, :: handleUserInfo)
-        profileViewModel.errorCode.observe(viewLifecycleOwner, :: handleErrorCode)
-        profileViewModel.languageSystem.observe(viewLifecycleOwner, :: handleLanguageSystem)
-        profileViewModel.isDarkModeEnabled.observe(viewLifecycleOwner, :: handleIsDarkModeEnabled)
+        profileViewModel.apply {
+            userInfo.observe(viewLifecycleOwner, ::handleUserInfo)
+            errorCode.observe(viewLifecycleOwner, ::handleErrorCode)
+            languageSystem.observe(viewLifecycleOwner, ::handleLanguageSystem)
+            isDarkModeEnabled.observe(viewLifecycleOwner, ::handleIsDarkModeEnabled)
+        }
     }
     private fun handleIsDarkModeEnabled(flagDark: Boolean){
         binding?.dayNightSwitch?.isChecked = flagDark
-//        activity?.recreate()
-
 
         binding?.dayNightSwitch?.setOnCheckedChangeListener(null)
         binding?.dayNightSwitch?.setOnCheckedChangeListener {_, isEnabled ->
@@ -97,11 +85,7 @@ class ProfileFragment : Fragment() {
     }
 
     private fun handleLanguageSystem(item: SelectLanguageModel){
-        if (item != null) {
-            binding?.textTvSelectLanguageText?.text = item.language
-        } else {
-            binding?.textTvSelectLanguageText?.text = "Қазақша"
-        }
+        binding?.textTvSelectLanguageText?.text = item?.language ?: "Қазақша"
     }
     private fun handleErrorCode(item: Int){
         binding?.textTvEmailUser?.text = getString(item)
@@ -119,7 +103,7 @@ class ProfileFragment : Fragment() {
                 btnExitVisible = false,
                 title = getString(R.string.MyProfile)
             )
-            onClickListener(R.id.mainFragment)   //******************
+            onClickListener(R.id.mainFragment)
         }
     }
     override fun onResume() {

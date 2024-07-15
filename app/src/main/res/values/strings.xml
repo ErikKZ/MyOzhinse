@@ -57,6 +57,7 @@
     <string name="error_favorite_response">Таңдамалыға қосылмады</string>
     <string name="message_maxLines">Толығырақ</string>
     <string name="message_hide_text">Жасыру</string>
+    <string name="message_info_update">Ақпарат Update etildi</string>
     <string name="error_info_update">Ақпарат Update etilmedi</string>
     <string name="message_name">Сіздің атыңыз</string>
     <string name="error_favoriteFalse_response">Таңдамалыдан алынбады</string>

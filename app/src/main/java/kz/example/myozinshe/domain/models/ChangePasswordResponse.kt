@@ -1,0 +1,18 @@
+package kz.example.myozinshe.domain.models
+
+import com.google.gson.annotations.SerializedName
+
+data class ChangePasswordResponse(
+    @SerializedName("accessToken")
+    val accessToken: String,
+    @SerializedName("email")
+    val email: String,
+    @SerializedName("id")
+    val id: Int,
+    @SerializedName("roles")
+    val roles: List<String>,
+    @SerializedName("tokenType")
+    val tokenType: String,
+    @SerializedName("username")
+    val username: String
+)
