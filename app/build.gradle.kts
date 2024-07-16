@@ -58,6 +58,7 @@ dependencies {
     implementation(libs.fadingedgelayout)
     implementation(libs.library)
     implementation(libs.format.watcher)
+    implementation(libs.photoview.library)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)

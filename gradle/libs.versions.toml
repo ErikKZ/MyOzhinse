@@ -22,6 +22,7 @@ glide = "5.0.0-rc01"
 fadingedgelayout = "1.0.0"
 library = "2.1.0"
 formatWatcher = "1.0.1"
+libraryVersion = "1.2.4"
 
 
 [libraries]
@@ -46,6 +47,7 @@ glide = { group = "com.github.bumptech.glide", name = "glide", version.ref = "gl
 fadingedgelayout = { group = "com.github.bosphere.android-fadingedgelayout", name = "fadingedgelayout", version.ref = "fadingedgelayout" }
 library = { group = "com.kyleduo.switchbutton", name = "library", version.ref = "library" }
 format-watcher = { group = "io.github.ihermandev", name = "format-watcher", version.ref = "formatWatcher" }
+photoview-library = { group = "com.github.chrisbanes.photoview", name = "library", version.ref = "libraryVersion" }
 
 
 [plugins]

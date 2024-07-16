@@ -1,18 +1,17 @@
 package kz.example.myozinshe.presentation
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.RecyclerView
-import androidx.recyclerview.widget.RecyclerView.Recycler
 import kz.example.myozinshe.R
 import kz.example.myozinshe.data.preference.PreferenceProvider
 import kz.example.myozinshe.databinding.FragmentCategoriesBinding
@@ -23,7 +22,6 @@ import kz.example.myozinshe.domain.utils.provideNavigationHost
 import kz.example.myozinshe.presentation.adapter.CategoryMovieAdapter
 import kz.example.myozinshe.presentation.interfaces.CategoryClickMovie
 import kz.example.myozinshe.presentation.viewModel.CategoriesViewModel
-import okhttp3.internal.http2.ErrorCode
 
 class CategoriesFragment : Fragment() {
     private var binding: FragmentCategoriesBinding? = null
@@ -128,13 +126,10 @@ class CategoriesFragment : Fragment() {
             setNavigationVisibility(false)
             additionalToolBarConfig(
                 toolbarVisible = true,
-                btnBackVisible = false,
+                btnBackVisible = true,
                 btnExitVisible = false,
                 title = "Бөлімдер"
             )
-
-//            additionalToolBarConfig(true, btnExitVisible = false, titleVisible = true, title = "Бөлімдер")
-
 
             onClickListener(R.id.mainFragment)   //******************
         }

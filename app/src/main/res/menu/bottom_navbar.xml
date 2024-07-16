@@ -7,6 +7,7 @@
         android:icon="@drawable/style_navbar_home_action"
         android:title="@string/home" />
     <item
+        android:id="@+id/searchFragment"
         android:icon="@drawable/style_navbar_search_action"
         android:title="@string/search" />
     <item

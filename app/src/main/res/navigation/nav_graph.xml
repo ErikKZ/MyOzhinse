@@ -9,7 +9,7 @@
         android:id="@+id/splashFragment"
         android:name="kz.example.myozinshe.presentation.SplashFragment"
         android:label="fragment_splash"
-        tools:layout="@layout/fragment_splash" >
+        tools:layout="@layout/fragment_splash">
         <action
             android:id="@+id/action_splashFragment_to_welcomeFragment"
             app:destination="@id/welcomeFragment" />
@@ -17,7 +17,7 @@
             android:id="@+id/action_splashFragment_to_mainFragment"
             app:destination="@id/mainFragment"
             app:popUpTo="@id/mainFragment"
-            app:popUpToInclusive="true"/>
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/welcomeFragment"
@@ -32,7 +32,7 @@
         android:id="@+id/loginFragment"
         android:name="kz.example.myozinshe.presentation.LoginFragment"
         android:label="fragment_login"
-        tools:layout="@layout/fragment_login" >
+        tools:layout="@layout/fragment_login">
         <action
             android:id="@+id/action_loginFragment_to_registrationFragment"
             app:destination="@id/registrationFragment" />
@@ -43,13 +43,13 @@
             android:id="@+id/action_loginFragment_to_mainFragment"
             app:destination="@id/mainFragment"
             app:popUpTo="@id/mainFragment"
-            app:popUpToInclusive="true"/>
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/registrationFragment"
         android:name="kz.example.myozinshe.presentation.RegistrationFragment"
         android:label="fragment_registration"
-        tools:layout="@layout/fragment_registration" >
+        tools:layout="@layout/fragment_registration">
         <action
             android:id="@+id/action_registrationFragment_to_loginFragment"
             app:destination="@id/loginFragment" />
@@ -58,7 +58,7 @@
         android:id="@+id/mainFragment"
         android:name="kz.example.myozinshe.presentation.MainFragment"
         android:label="fragment_main"
-        tools:layout="@layout/fragment_main" >
+        tools:layout="@layout/fragment_main">
         <action
             android:id="@+id/action_mainFragment_to_aboutMovieFragment"
             app:destination="@id/aboutMovieFragment"
@@ -72,67 +72,66 @@
         </action>
         <action
             android:id="@+id/action_mainFragment_to_categoriesFragment"
-            app:destination="@id/categoriesFragment" >
+            app:destination="@id/categoriesFragment">
             <argument
                 android:name="categoryId"
-                app:argType="integer">
-            </argument>
+                app:argType="integer"></argument>
         </action>
     </fragment>
     <fragment
         android:id="@+id/aboutMovieFragment"
         android:name="kz.example.myozinshe.presentation.AboutMovieFragment"
         android:label="fragment_about_movie"
-        tools:layout="@layout/fragment_about_movie" >
+        tools:layout="@layout/fragment_about_movie">
         <action
             android:id="@+id/action_aboutMovieFragment_to_mainFragment"
-            app:destination="@id/mainFragment" >
+            app:destination="@id/mainFragment">
             <argument
                 android:name="movieId"
-                app:argType="integer"/>
+                app:argType="integer" />
         </action>
         <argument
             android:name="movieId"
-            app:argType="integer"  />
+            app:argType="integer" />
+        <action
+            android:id="@+id/action_aboutMovieFragment_to_imageFragment"
+            app:destination="@id/imageFragment" />
     </fragment>
     <fragment
         android:id="@+id/categoriesFragment"
         android:name="kz.example.myozinshe.presentation.CategoriesFragment"
         android:label="fragment_categories"
-        tools:layout="@layout/fragment_categories" >
+        tools:layout="@layout/fragment_categories">
         <action
             android:id="@+id/action_categoriesFragment_to_aboutMovieFragment"
-            app:destination="@id/aboutMovieFragment"  >
+            app:destination="@id/aboutMovieFragment">
             <argument
                 android:name="movieId"
-                app:argType="integer">
-            </argument>
+                app:argType="integer"></argument>
         </action>
         <argument
             android:name="categoryId"
-            app:argType="integer">
-        </argument>
+            app:argType="integer"></argument>
     </fragment>
     <fragment
         android:id="@+id/favoriteFragment"
         android:name="kz.example.myozinshe.presentation.FavoriteFragment"
         android:label="fragment_favorite"
-        tools:layout="@layout/fragment_favorite" >
+        tools:layout="@layout/fragment_favorite">
         <action
             android:id="@+id/action_favoriteFragment_to_aboutMovieFragment"
             app:destination="@id/aboutMovieFragment"
             app:popUpTo="@id/mainFragment"
-            app:popUpToInclusive="true"/>
+            app:popUpToInclusive="true" />
         <argument
             android:name="movieId"
-            app:argType="integer">
-        </argument>
+            app:argType="integer"></argument>
     </fragment>
     <fragment
         android:id="@+id/profileFragment"
         android:name="kz.example.myozinshe.presentation.ProfileFragment"
         android:label="fragment_profile"
-        tools:layout="@layout/fragment_profile" >
+        tools:layout="@layout/fragment_profile">
         <action
             android:id="@+id/action_profileFragment2_to_splashFragment"
             app:destination="@id/splashFragment" />
@@ -141,7 +140,7 @@
         android:id="@+id/infoFragment"
         android:name="kz.example.myozinshe.presentation.InfoFragment"
         android:label="fragment_info"
-        tools:layout="@layout/fragment_info" >
+        tools:layout="@layout/fragment_info">
         <action
             android:id="@+id/action_infoFragment_to_profileFragment"
             app:destination="@id/profileFragment" />
@@ -150,9 +149,40 @@
         android:id="@+id/rePasswordFragment"
         android:name="kz.example.myozinshe.presentation.RePasswordFragment"
         android:label="fragment_re_password"
-        tools:layout="@layout/fragment_re_password" >
+        tools:layout="@layout/fragment_re_password">
         <action
             android:id="@+id/action_rePasswordFragment_to_profileFragment"
             app:destination="@id/profileFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/searchFragment"
+        android:name="kz.example.myozinshe.presentation.SearchFragment"
+        android:label="fragment_search"
+        tools:layout="@layout/fragment_search">
+        <action
+            android:id="@+id/action_searchFragment_to_categoriesFragment"
+            app:destination="@id/categoriesFragment">
+
+            <argument
+                android:name="categoryId"
+                app:argType="integer"></argument>
+        </action>
+        <action
+            android:id="@+id/action_searchFragment_to_aboutMovieFragment"
+            app:destination="@id/aboutMovieFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/imageFragment"
+        android:name="kz.example.myozinshe.presentation.ImageFragment"
+        android:label="fragment_image"
+        tools:layout="@layout/fragment_image">
+        <action
+            android:id="@+id/action_imageFragment_to_aboutMovieFragment"
+            app:destination="@id/aboutMovieFragment" />
+        <argument
+            android:name="link"
+            app:argType="string">
+        </argument>
+
     </fragment>
 </navigation>

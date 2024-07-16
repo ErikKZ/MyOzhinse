@@ -39,10 +39,12 @@ class SplashFragment : Fragment() {
         }
     }
 
+
+
     private fun navigateBasedOnToken(token: String?) {
         if (token == "without_token") {
             findNavController().navigate(R.id.welcomeFragment)
-        } else if (token.isNullOrEmpty() ) {
+        } else if (!token.isNullOrEmpty() ) {
             findNavController().navigate(R.id.mainFragment)
         } else {
             findNavController().navigate(R.id.welcomeFragment)

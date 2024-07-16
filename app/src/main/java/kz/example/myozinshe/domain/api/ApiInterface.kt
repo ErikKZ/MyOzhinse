@@ -10,7 +10,7 @@ import kz.example.myozinshe.domain.models.MainPageModel
 import kz.example.myozinshe.domain.models.MovieIdModel
 import kz.example.myozinshe.domain.models.MovieInfoResponse
 import kz.example.myozinshe.domain.models.MoviesMain
-import kz.example.myozinshe.domain.models.SearchResponseModel
+import kz.example.myozinshe.domain.models.SearchResponseModelItem
 import kz.example.myozinshe.domain.models.SeriesModel
 import kz.example.myozinshe.domain.models.UserInfo
 import kz.example.myozinshe.domain.models.UserInfoRequest
@@ -47,7 +47,7 @@ interface ApiInterface {
         @Query("details") details: String,
         @Query("principal") principal: String,
         @Query("search") search: String
-    ): SearchResponseModel
+    ): List<SearchResponseModelItem>
 
     @HTTP(method = "PUT", path = "/core/V1/user/profile/", hasBody = true)
     suspend fun updateUserInfo(

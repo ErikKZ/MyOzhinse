@@ -10,8 +10,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.view.isGone
 import androidx.core.view.isVisible
-import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.LifecycleRegistry
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
@@ -105,31 +103,6 @@ class MainActivity : AppCompatActivity(), NavigationHostProvider {
         titleTextView.isVisible = title.isNotEmpty()
         titleTextView.text = title
     }
-
-//    override fun setNavigationToolBar(visible: Boolean, isGone: Boolean) {
-//        val toolbarUpnavBinding = binding?.linerLayoutToolbar as ToolbarUpnavBinding
-//        val toolbar = toolbarUpnavBinding.toolbarInfo
-//
-//        toolbar.isVisible = visible
-//        toolbar.isGone = isGone
-//    }
-//
-//    override fun additionalToolBarConfig(
-//        btnBackVisible: Boolean,
-//        btnExitVisible: Boolean,
-//        titleVisible: Boolean,
-//        title: String
-//    ) {
-//        val toolbarUpnavBinding = binding?.linerLayoutToolbar as ToolbarUpnavBinding
-//        val btnBack = toolbarUpnavBinding.btnBack
-//        val btnExit = toolbarUpnavBinding.btnExit
-//        val titleTextView = toolbarUpnavBinding.titleToolbar
-//
-//        btnBack.isVisible = btnBackVisible
-//        btnExit.isVisible = btnExitVisible
-//        titleTextView.isVisible = titleVisible
-//        titleTextView.text = title
-//    }
 
     override fun onClickListener(id: Int) {
         val toolbarUpnavBinding = binding?.linerLayoutToolbar as ToolbarUpnavBinding

@@ -19,7 +19,6 @@ import kotlinx.coroutines.launch
 import kz.example.myozinshe.R
 import kz.example.myozinshe.data.preference.PreferenceProvider
 import kz.example.myozinshe.databinding.FragmentAboutMovieBinding
-import kz.example.myozinshe.domain.models.Genre
 import kz.example.myozinshe.domain.models.MovieInfoResponse
 import kz.example.myozinshe.domain.models.Screenshot
 import kz.example.myozinshe.domain.utils.CustomDividerItemDecoration
@@ -174,7 +173,8 @@ class AboutMovieFragment : Fragment() {
         imageAdapter = ImageAdapter().apply {
             onTouchItem(object : ImageClick {
                 override fun onClickItem(item: Screenshot) {
-                    TODO("Not yet implemented")
+                    val action = AboutMovieFragmentDirections.actionAboutMovieFragmentToImageFragment(item.link)
+                    navController.navigate(action)
                 }
             })
         }
@@ -197,8 +197,6 @@ class AboutMovieFragment : Fragment() {
                 btnExitVisible = false,
                 title = "Сипаттама"
             )
-//            additionalToolBarConfig(true, btnExitVisible = false, titleVisible = true, title = "Сипаттама")
-
             onClickListener(R.id.mainFragment)
         }
     }
