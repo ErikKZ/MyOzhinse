@@ -75,7 +75,8 @@
             app:destination="@id/categoriesFragment">
             <argument
                 android:name="categoryId"
-                app:argType="integer"></argument>
+                app:argType="integer">
+            </argument>
         </action>
     </fragment>
     <fragment
@@ -96,6 +97,20 @@
         <action
             android:id="@+id/action_aboutMovieFragment_to_imageFragment"
             app:destination="@id/imageFragment" />
+        <action
+            android:id="@+id/action_aboutMovieFragment_to_seriesFragment"
+            app:destination="@id/seriesFragment" >
+            <argument
+                android:name="movieId"
+                app:argType="integer" />
+        </action>
+        <action
+            android:id="@+id/action_aboutMovieFragment_to_videoPlayerFragment"
+            app:destination="@id/videoPlayerFragment" >
+            <argument
+                android:name="link"
+                app:argType="string" />
+        </action>
     </fragment>
     <fragment
         android:id="@+id/categoriesFragment"
@@ -107,7 +122,8 @@
             app:destination="@id/aboutMovieFragment">
             <argument
                 android:name="movieId"
-                app:argType="integer"></argument>
+                app:argType="integer">
+            </argument>
         </action>
         <argument
             android:name="categoryId"
@@ -125,7 +141,8 @@
             app:popUpToInclusive="true" />
         <argument
             android:name="movieId"
-            app:argType="integer"></argument>
+            app:argType="integer">
+        </argument>
     </fragment>
     <fragment
         android:id="@+id/profileFragment"
@@ -165,7 +182,8 @@
 
             <argument
                 android:name="categoryId"
-                app:argType="integer"></argument>
+                app:argType="integer">
+            </argument>
         </action>
         <action
             android:id="@+id/action_searchFragment_to_aboutMovieFragment"
@@ -184,5 +202,57 @@
             app:argType="string">
         </argument>
 
+    </fragment>
+    <fragment
+        android:id="@+id/similarFragment"
+        android:name="kz.example.myozinshe.presentation.SimilarFragment"
+        android:label="fragment_similar"
+        tools:layout="@layout/fragment_similar" >
+        <action
+            android:id="@+id/action_similarFragment_to_aboutMovieFragment"
+            app:destination="@id/aboutMovieFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/seriesFragment"
+        android:name="kz.example.myozinshe.presentation.SeriesFragment"
+        android:label="fragment_series"
+        tools:layout="@layout/fragment_series" >
+        <action
+            android:id="@+id/action_seriesFragment_to_aboutMovieFragment"
+            app:destination="@id/aboutMovieFragment" />
+        <action
+            android:id="@+id/action_seriesFragment_to_videoPlayerFragment"
+            app:destination="@id/videoPlayerFragment" >
+
+            <argument
+                android:name="link"
+                app:argType="string">
+            </argument>
+            <argument
+                android:name="movieId"
+                app:argType="integer">
+            </argument>
+        </action>
+        <argument
+            android:name="movieId"
+            app:argType="integer"/>
+    </fragment>
+    <fragment
+        android:id="@+id/videoPlayerFragment"
+        android:name="kz.example.myozinshe.presentation.VideoPlayerFragment"
+        android:label="fragment_video_player"
+        tools:layout="@layout/fragment_video_player" >
+        <action
+            android:id="@+id/action_videoPlayerFragment_to_seriesFragment"
+            app:destination="@id/seriesFragment" />
+        <argument
+            android:name="link"
+            app:argType="string">
+        </argument>
+        <argument
+            android:name="movieId"
+            android:defaultValue="0"
+            app:argType="integer">
+        </argument>
     </fragment>
 </navigation>

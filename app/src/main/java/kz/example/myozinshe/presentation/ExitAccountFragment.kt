@@ -11,7 +11,6 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import kz.example.myozinshe.R
 import kz.example.myozinshe.data.preference.PreferenceProvider
 import kz.example.myozinshe.databinding.BottomSheetExitBinding
-import kz.example.myozinshe.domain.utils.provideNavigationHost
 
 class ExitAccountFragment : BottomSheetDialogFragment() {
     private var binding: BottomSheetExitBinding? = null
@@ -44,14 +43,6 @@ class ExitAccountFragment : BottomSheetDialogFragment() {
                 dialog?.dismiss()
             }
         }
-    }
-
-    override fun onResume() {
-        super.onResume()
-    }
-
-    override fun onPause() {
-        super.onPause()
     }
 
     override fun onDestroyView() {

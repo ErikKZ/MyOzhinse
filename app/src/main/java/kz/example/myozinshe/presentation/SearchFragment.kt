@@ -9,7 +9,6 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import kz.example.myozinshe.R
@@ -24,7 +23,7 @@ import kz.example.myozinshe.presentation.viewModel.SearchViewModel
 
 class SearchFragment : Fragment() {
     private var binding: FragmentSearchBinding? = null
-    private lateinit var navController: NavController
+    private val navController by lazy { findNavController() }
     private val searchViewModel: SearchViewModel by viewModels()
 
     private lateinit var searchMovieAdapter: SearchMovieAdapter
@@ -40,7 +39,7 @@ class SearchFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        navController = findNavController()
+        
 
         setupUI()
         setObserve()
@@ -68,7 +67,7 @@ class SearchFragment : Fragment() {
                 navigation(31, "Ситкомдар")
             }
 
-            editTextSearchMovie?.addTextChangedListener(object : TextWatcher {
+            editTextSearchMovie.addTextChangedListener(object : TextWatcher {
                 override fun beforeTextChanged(
                     s: CharSequence?,
                     start: Int,
@@ -81,12 +80,12 @@ class SearchFragment : Fragment() {
 
                 override fun afterTextChanged(s: Editable?) {
                     if (s.toString().isNullOrEmpty()) {
-                        btnRefreshEditText?.visibility = View.GONE
+                        btnRefreshEditText.visibility = View.GONE
                     } else {
                         searchViewModel.fetchSearchMovies(token, s.toString())
 
-                        btnRefreshEditText?.visibility = View.VISIBLE
-                        btnRefreshEditText?.setOnClickListener {
+                        btnRefreshEditText.visibility = View.VISIBLE
+                        btnRefreshEditText.setOnClickListener {
                             binding?.editTextSearchMovie?.text?.clear()
                             binding?.sanattarConstraintLayout?.visibility = View.VISIBLE
                             binding?.searchResultConstraintLayout?.visibility = View.GONE
@@ -117,7 +116,7 @@ class SearchFragment : Fragment() {
             binding?.sanattarConstraintLayout?.visibility = View.VISIBLE
             binding?.searchResultConstraintLayout?.visibility = View.GONE
         } else {
-            searchMovieAdapter?.submitList(searchResponseModelList)
+            searchMovieAdapter.submitList(searchResponseModelList)
             binding?.sanattarConstraintLayout?.visibility = View.GONE
             binding?.searchResultConstraintLayout?.visibility = View.VISIBLE
         }

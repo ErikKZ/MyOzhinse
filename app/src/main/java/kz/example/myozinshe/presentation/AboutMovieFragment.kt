@@ -10,7 +10,6 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
-import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.RecyclerView
@@ -35,7 +34,7 @@ class AboutMovieFragment : Fragment() {
 
     private val args: AboutMovieFragmentArgs by navArgs()
 
-    private lateinit var navController: NavController
+    private val navController by lazy { findNavController() }
 
     private lateinit var imageAdapter: ImageAdapter
     override fun onCreateView(
@@ -49,7 +48,7 @@ class AboutMovieFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        navController = findNavController()
+        
         token = PreferenceProvider(requireContext()).getToken()!!
         aboutMovieViewModel.fetchMovie(token, args.movieId)
 
@@ -83,7 +82,7 @@ class AboutMovieFragment : Fragment() {
     }
 
     private fun handleSelectMovie(movie: MovieInfoResponse) {
-        imageAdapter?.submitList(movie.screenshots)
+        imageAdapter.submitList(movie.screenshots)
 
         handleMovieDetails(movie)
         setupPlayButton(movie)
@@ -95,14 +94,14 @@ class AboutMovieFragment : Fragment() {
         }
 
         binding?.btnSimilarMovieMore?.setOnClickListener {
-            findNavController().navigate(R.id.aboutMovieFragment) //*********** to_similarFragment
+            findNavController().navigate(R.id.similarFragment)
         }
     }
 
 
     private fun handleMovieDetails(movie: MovieInfoResponse) {
         binding?.run {
-            fullInfoLayout?.visibility = View.VISIBLE
+            fullInfoLayout.visibility = View.VISIBLE
 
             textTvTittleMovie.text = movie.name
             Glide.with(requireContext()).load(movie.poster.link).into(imageView3)
@@ -110,18 +109,26 @@ class AboutMovieFragment : Fragment() {
             textTvDescription.text = movie.description
             setupMoreDescriptionButton()
 
-            textTvBolimder.text = "${movie.seasonCount} сезон, ${movie.seriesCount} серия"
+            textTvBolimder.text = "${movie.seasonCount} ${R.string.sezon}, ${movie.seriesCount} серия"
             textTvBolimder.visibility = if (movie.video == null) View.VISIBLE else View.GONE
+            textTvBolimder.setOnClickListener {
+                val action =  AboutMovieFragmentDirections.actionAboutMovieFragmentToSeriesFragment(movie.id)
+                navController.navigate(action)
+            }
+
             textBolimder.visibility = if (movie.video == null) View.VISIBLE else View.GONE
             btnNextAllMovie.visibility = if (movie.video == null) View.VISIBLE else View.GONE
-
+            btnNextAllMovie.setOnClickListener {
+                val action =  AboutMovieFragmentDirections.actionAboutMovieFragmentToSeriesFragment(movie.id)
+                navController.navigate(action)
+            }
             textTvAdditionalInfoYear.text = movie.year.toString()
             textTvGenres.text = movie.genres.joinToString(separator = " • ") { it.name }
 
             textTvDirector.text = movie.director
             textTvProducer.text = movie.producer
 
-            btnFavoriteMovie?.background = if (movie.favorite) {
+            btnFavoriteMovie.background = if (movie.favorite) {
                 resources.getDrawable(R.drawable.ic_button_favorite_focused, null)
             } else {
                 resources.getDrawable(R.drawable.ic_button_favorite, null)
@@ -132,11 +139,11 @@ class AboutMovieFragment : Fragment() {
     private fun setupPlayButton(movie: MovieInfoResponse) {
         binding?.btnPlayMovie?.setOnClickListener {
             val action = if (movie.video == null) {
-                AboutMovieFragmentDirections.actionAboutMovieFragmentToMainFragment(1)  //*********
+                AboutMovieFragmentDirections.actionAboutMovieFragmentToSeriesFragment(movie.id)
             } else {
-                AboutMovieFragmentDirections.actionAboutMovieFragmentToMainFragment(1)  //******
+                AboutMovieFragmentDirections.actionAboutMovieFragmentToVideoPlayerFragment(movie.video.link)
             }
-            findNavController().navigate(action)
+            navController.navigate(action)
         }
     }
 

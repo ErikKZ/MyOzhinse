@@ -8,7 +8,6 @@ import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.RecyclerView
@@ -25,7 +24,7 @@ import kz.example.myozinshe.presentation.viewModel.CategoriesViewModel
 
 class CategoriesFragment : Fragment() {
     private var binding: FragmentCategoriesBinding? = null
-    private lateinit var navController: NavController
+    private val navController by lazy { findNavController() }
     private lateinit var categoryAdapter: CategoryMovieAdapter
     private val categoriesViewModel: CategoriesViewModel by viewModels()
     private val args: CategoriesFragmentArgs by navArgs()
@@ -40,8 +39,6 @@ class CategoriesFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        navController =findNavController()
 
         setupUI()
         fetchCategoryMovies()
@@ -62,16 +59,11 @@ class CategoriesFragment : Fragment() {
 
     private fun fetchCategoryMovies(){
         val categoryId = args.categoryId
-        if (categoryId != null) {
-            val token = PreferenceProvider(requireContext()).getToken()!!
+        val token = PreferenceProvider(requireContext()).getToken()!!
 
-            categoriesViewModel.categoryMovie(token, categoryId)
-            binding?.shimmerInMainFragment?.startShimmer()
-            binding?.rcCategoryFragment?.visibility= View.GONE
-
-        } else {
-            Toast.makeText(requireContext(),R.string.error_category,Toast.LENGTH_SHORT).show()
-        }
+        categoriesViewModel.categoryMovie(token, categoryId)
+        binding?.shimmerInMainFragment?.startShimmer()
+        binding?.rcCategoryFragment?.visibility= View.GONE
     }
 
     private fun setObserve() {
@@ -84,23 +76,26 @@ class CategoriesFragment : Fragment() {
     }
 
     private fun handleCatehoryMovie(categoryMovieResponse: CategoryMovieResponse){
-        if (categoryMovieResponse != null) {
             categoryAdapter.submitList(categoryMovieResponse.content)
             updateUI(categoryMovieResponse)
-        }
     }
 
     private fun updateUI(item: CategoryMovieResponse) {
         binding?.apply {
-            shimmerInMainFragment?.stopShimmer()
-            if (item == null) {
-                shimmerInMainFragment?.visibility = View.VISIBLE
-                rcCategoryFragment?.visibility = View.GONE
-            } else {
-                shimmerInMainFragment?.visibility = View.GONE
-                rcCategoryFragment?.visibility = View.VISIBLE
-            }
+            shimmerInMainFragment.stopShimmer()
+            shimmerInMainFragment.visibility = View.VISIBLE
+            rcCategoryFragment.visibility = View.GONE
         }
+//        binding?.apply {
+//            shimmerInMainFragment?.stopShimmer()
+//            if (item == null) {
+//                shimmerInMainFragment?.visibility = View.VISIBLE
+//                rcCategoryFragment?.visibility = View.GONE
+//            } else {
+//                shimmerInMainFragment?.visibility = View.GONE
+//                rcCategoryFragment?.visibility = View.VISIBLE
+//            }
+//        }
     }
 
     private fun setupUI() {

@@ -59,6 +59,8 @@ dependencies {
     implementation(libs.library)
     implementation(libs.format.watcher)
     implementation(libs.photoview.library)
+    implementation(libs.core)
+    implementation(libs.custom.ui)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)

@@ -6,7 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import kz.example.myozinshe.R
 import kz.example.myozinshe.data.preference.PreferenceProvider
@@ -20,7 +19,7 @@ class ProfileFragment : Fragment() {
     private var binding: FragmentProfileBinding? = null
     private val profileViewModel: ProfileViewModel by viewModels()
 
-    private lateinit var navController: NavController
+    private val navController by lazy { findNavController() }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -33,7 +32,7 @@ class ProfileFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        navController = findNavController()
+        
         profileViewModel.systemLanguage()
 
 //        val transaction: FragmentTransaction = parentFragmentManager.beginTransaction()
@@ -81,7 +80,7 @@ class ProfileFragment : Fragment() {
     }
 
     private fun handleLanguageSystem(item: SelectLanguageModel){
-        binding?.textTvSelectLanguageText?.text = item?.language ?: "Қазақша"
+        binding?.textTvSelectLanguageText?.text = if (item.language.isNullOrEmpty())  "Қазақша" else item.language
     }
     private fun handleErrorCode(item: Int){
         binding?.textTvEmailUser?.text = getString(item)

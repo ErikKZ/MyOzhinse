@@ -6,10 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.navigation.NavController
-import androidx.navigation.fragment.FragmentNavigator
 import androidx.navigation.fragment.findNavController
-import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.RecyclerView
 import kz.example.myozinshe.R
 import kz.example.myozinshe.data.preference.PreferenceProvider
@@ -34,7 +31,7 @@ class MainFragment : Fragment() {
     private var binding: FragmentMainBinding? = null
 
     private val mainViewModel: MainViewModel by viewModels()
-    private lateinit var navController: NavController
+    private val navController by lazy { findNavController() }
 
 
     private lateinit var mainMovieAdapter: MainMovieAdapter
@@ -56,14 +53,14 @@ class MainFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        navController = findNavController()
+
 
         binding?.apply {
-            textTVERROR?.visibility = View.GONE
-            shimmerInMainFragment?.startShimmer()
-            shimmerInMainFragmentAdd?.startShimmer()
-            imgERRORView?.visibility = View.GONE
-            constrainMainFragment?.visibility = View.GONE
+            textTVERROR.visibility = View.GONE
+            shimmerInMainFragment.startShimmer()
+            shimmerInMainFragmentAdd.startShimmer()
+            imgERRORView.visibility = View.GONE
+            constrainMainFragment.visibility = View.GONE
 
             listOf(
                 btnCategoryAllMovie1,
@@ -115,8 +112,8 @@ class MainFragment : Fragment() {
         if (!genreResponse.isNullOrEmpty()) {
             genreMainAdapter.submitList(genreResponse)
             binding?.apply {
-                btnCategoryAllMovie3?.visibility = View.VISIBLE
-                textTvCategoryTitle3?.text = getString(R.string.ChooceGenre)
+                btnCategoryAllMovie3.visibility = View.VISIBLE
+                textTvCategoryTitle3.text = getString(R.string.ChooceGenre)
             }
         }
     }
@@ -127,11 +124,11 @@ class MainFragment : Fragment() {
 
         if (!movyes.isNullOrEmpty()) {
             binding?.apply {
-                btnCategoryAllMovie6?.visibility = View.VISIBLE
-                btnCategoryAllMovie6?.setOnClickListener { t ->
+                btnCategoryAllMovie6.visibility = View.VISIBLE
+                btnCategoryAllMovie6.setOnClickListener { t ->
                     navToCategory(31)
                 }
-                textTvCategoryTitle6?.text = mainPageModel[4].categoryName
+                textTvCategoryTitle6.text = mainPageModel[4].categoryName
             }
         }
     }
@@ -144,11 +141,11 @@ class MainFragment : Fragment() {
 
         if (!movyes.isNullOrEmpty()) {
             binding?.apply {
-                btnCategoryAllMovie5?.visibility = View.VISIBLE
-                btnCategoryAllMovie5?.setOnClickListener { t ->
+                btnCategoryAllMovie5.visibility = View.VISIBLE
+                btnCategoryAllMovie5.setOnClickListener { t ->
                     navToCategory(9)
                 }
-                textTvCategoryTitle5?.text = mainPageModel[3].categoryName
+                textTvCategoryTitle5.text = mainPageModel[3].categoryName
             }
         }
     }
@@ -160,11 +157,11 @@ class MainFragment : Fragment() {
 
         if (!movyes.isNullOrEmpty()) {
             binding?.apply {
-                btnCategoryAllMovie4?.visibility = View.VISIBLE
-                btnCategoryAllMovie4?.setOnClickListener { t ->
+                btnCategoryAllMovie4.visibility = View.VISIBLE
+                btnCategoryAllMovie4.setOnClickListener { t ->
                     navToCategory(8)
                 }
-                textTvCategoryTitle4?.text = mainPageModel[2].categoryName
+                textTvCategoryTitle4.text = mainPageModel[2].categoryName
             }
         }
     }
@@ -177,11 +174,11 @@ class MainFragment : Fragment() {
 
         if (!movyes.isNullOrEmpty()) {
             binding?.apply {
-                btnCategoryAllMovie2?.visibility = View.VISIBLE
-                btnCategoryAllMovie2?.setOnClickListener { t ->
+                btnCategoryAllMovie2.visibility = View.VISIBLE
+                btnCategoryAllMovie2.setOnClickListener { t ->
                     navToCategory(5)
                 }
-                textTvCategoryTitle2?.text = mainPageModel[1].categoryName
+                textTvCategoryTitle2.text = mainPageModel[1].categoryName
             }
         }
     }
@@ -198,15 +195,15 @@ class MainFragment : Fragment() {
 
         if (!movyes.isNullOrEmpty()) {
             binding?.apply {
-                shimmerInMainFragmentAdd?.stopShimmer()
-                shimmerInMainFragmentAdd?.visibility = View.GONE
+                shimmerInMainFragmentAdd.stopShimmer()
+                shimmerInMainFragmentAdd.visibility = View.GONE
 
-                btnCategoryAllMovie1?.visibility = View.VISIBLE
-                btnCategoryAllMovie1?.setOnClickListener { t ->
+                btnCategoryAllMovie1.visibility = View.VISIBLE
+                btnCategoryAllMovie1.setOnClickListener { t ->
                     navToCategory(1)
                 }
 
-                textTvCategoryTitle1?.text = mainPageModel[0].categoryName
+                textTvCategoryTitle1.text = mainPageModel[0].categoryName
             }
         }
     }
@@ -216,15 +213,15 @@ class MainFragment : Fragment() {
 
         if (movies.isNullOrEmpty()) {
             binding?.apply {
-                textTVERROR?.visibility = View.VISIBLE
-                imgERRORView?.visibility = View.VISIBLE
-                nestedScroll?.visibility = View.GONE
+                textTVERROR.visibility = View.VISIBLE
+                imgERRORView.visibility = View.VISIBLE
+                nestedScroll.visibility = View.GONE
             }
         } else {
             binding?.apply {
-                shimmerInMainFragment?.stopShimmer()
-                shimmerInMainFragment?.visibility = View.GONE
-                constrainMainFragment?.visibility = View.VISIBLE
+                shimmerInMainFragment.stopShimmer()
+                shimmerInMainFragment.visibility = View.GONE
+                constrainMainFragment.visibility = View.VISIBLE
             }
         }
     }
@@ -234,7 +231,7 @@ class MainFragment : Fragment() {
         binding?.apply {
             textTVERROR.visibility = if (show) View.VISIBLE else View.GONE   // может ошибку из VM брать ?
             imgERRORView.visibility = if (show) View.VISIBLE else View.GONE
-            recyclerViewPlaceForMainMovies?.visibility = if (show) View.VISIBLE else View.GONE // ПРОВРЕИТЬ когда бэк не подключен, может вообще убрать!
+            recyclerViewPlaceForMainMovies.visibility = if (show) View.VISIBLE else View.GONE // ПРОВРЕИТЬ когда бэк не подключен, может вообще убрать!
             nestedScroll.visibility = if (show) View.GONE else View.VISIBLE
         }
     }

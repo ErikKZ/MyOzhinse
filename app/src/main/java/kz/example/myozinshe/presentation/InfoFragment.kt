@@ -1,23 +1,18 @@
 package kz.example.myozinshe.presentation
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.lifecycleScope
-import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import com.github.ihermandev.formatwatcher.FormatWatcher
 import com.google.android.material.datepicker.MaterialDatePicker
-import kotlinx.coroutines.launch
 import kz.example.myozinshe.R
 import kz.example.myozinshe.data.preference.PreferenceProvider
 import kz.example.myozinshe.databinding.FragmentInfoBinding
-import kz.example.myozinshe.domain.api.ApiInterface
-import kz.example.myozinshe.domain.api.ServiceBuilder
 import kz.example.myozinshe.domain.models.UserInfo
 import kz.example.myozinshe.domain.models.UserInfoRequest
 import kz.example.myozinshe.domain.utils.MonthChange
@@ -33,7 +28,7 @@ class InfoFragment : Fragment() {
     private val infoViewModel: InfoViewModel by viewModels()
 
     private var token = ""
-    private lateinit var navController: NavController
+    private val navController by lazy { findNavController() }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -46,7 +41,7 @@ class InfoFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        navController =findNavController()
+
         token = PreferenceProvider(requireContext()).getToken()!!
 
         infoViewModel.getInfo(token)
@@ -63,9 +58,9 @@ class InfoFragment : Fragment() {
         navController.navigate(R.id.profileFragment)
     }
     private fun handleUserInfo(userInfo: UserInfo) {
-        var birthDate: String = ""
-        var name: String = ""
-        var phoneNumber: String = ""
+        var birthDate = ""
+        var name = ""
+        var phoneNumber = ""
 
         binding?.run {
             textTvEmail.text = userInfo.user.email

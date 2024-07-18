@@ -1,14 +1,12 @@
 package kz.example.myozinshe.presentation
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.activity.OnBackPressedCallback
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import kz.example.myozinshe.R
@@ -25,7 +23,7 @@ class FavoriteFragment : Fragment() {
     private var binding: FragmentFavoriteBinding? = null
     private val favoriteViewModel: FavoriteViewModel by viewModels()
 
-    private lateinit var navController: NavController
+    private val navController by lazy { findNavController() }
     private lateinit var favoriteMovieAdapter: FavoriteMovieAdapter
 
     override fun onCreateView(
@@ -39,7 +37,7 @@ class FavoriteFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        navController = findNavController()
+        
 
         fetchFavoriteMovies()
         setupUI()

@@ -11,7 +11,7 @@ import kz.example.myozinshe.domain.models.MovieIdModel
 import kz.example.myozinshe.domain.models.MovieInfoResponse
 import kz.example.myozinshe.domain.models.MoviesMain
 import kz.example.myozinshe.domain.models.SearchResponseModelItem
-import kz.example.myozinshe.domain.models.SeriesModel
+import kz.example.myozinshe.domain.models.SeriesModelItem
 import kz.example.myozinshe.domain.models.UserInfo
 import kz.example.myozinshe.domain.models.UserInfoRequest
 import retrofit2.Response
@@ -73,11 +73,11 @@ interface ApiInterface {
         @Body movieId: MovieIdModel
     )
 
-    @GET("/core/V1/seasson/{movieId}")
+    @GET("/core/V1/seasons/{movieId}")
     suspend fun getSeries(
         @Header("Authorization") token: String,
         @Path("movieId") movieId: Int
-    ): SeriesModel
+    ): List<SeriesModelItem>
 
     @GET("/core/V1/movies/{id}")
     suspend fun movieWithId(
