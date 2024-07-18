@@ -108,8 +108,7 @@ class AboutMovieFragment : Fragment() {
 
             textTvDescription.text = movie.description
             setupMoreDescriptionButton()
-
-            textTvBolimder.text = "${movie.seasonCount} ${R.string.sezon}, ${movie.seriesCount} серия"
+            textTvBolimder.text = "${movie.seasonCount} ${root.context.getString(R.string.sezon)}, ${movie.seriesCount} серия"
             textTvBolimder.visibility = if (movie.video == null) View.VISIBLE else View.GONE
             textTvBolimder.setOnClickListener {
                 val action =  AboutMovieFragmentDirections.actionAboutMovieFragmentToSeriesFragment(movie.id)

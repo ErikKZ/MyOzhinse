@@ -70,11 +70,14 @@ class ProfileViewModel(application: Application): AndroidViewModel(application )
 
     fun toggleDarkMode(enabled: Boolean) {
         viewModelScope.launch {
-            PreferenceProvider(getApplication()).saveDarkModeEnabledState(enabled)
-            AppCompatDelegate.setDefaultNightMode(
-                if (enabled) AppCompatDelegate.MODE_NIGHT_YES else AppCompatDelegate.MODE_NIGHT_NO
-            )
-            _isDarkModeEnabled.value = enabled
+            runCatching {
+                PreferenceProvider(getApplication()).saveDarkModeEnabledState(enabled)
+                AppCompatDelegate.setDefaultNightMode(
+                    if (enabled) AppCompatDelegate.MODE_NIGHT_YES else AppCompatDelegate.MODE_NIGHT_NO
+                )
+                _isDarkModeEnabled.value = enabled
+
+            }
         }
     }
 

@@ -104,12 +104,18 @@ class MainActivity : AppCompatActivity(), NavigationHostProvider {
         titleTextView.text = title
     }
 
-    override fun onClickListener(id: Int) {
+    override fun onClickListener(id: Int,arg: Int  ) {
         val toolbarUpnavBinding = binding?.linerLayoutToolbar as ToolbarUpnavBinding
         toolbarUpnavBinding.btnBack.setOnClickListener {
-            findNavController(R.id.nav_host_fragment).navigate(id)
+            if (arg == 0) {
+                findNavController(R.id.nav_host_fragment).navigate(id)
+            } else {
+                val action = SeriesFragmentDirections.actionSeriesFragmentToAboutMovieFragment(arg)
+                findNavController(R.id.nav_host_fragment).navigate(action)
+            }
         }
     }
+
 
     override fun showBottomSheetExit(unit: BottomSheetDialogFragment) {
         val toolbarUpnavBinding = binding?.linerLayoutToolbar as ToolbarUpnavBinding

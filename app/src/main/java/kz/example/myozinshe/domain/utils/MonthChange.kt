@@ -18,7 +18,9 @@ class MonthChange {
             "Желтоқсан"
         )
         for (i in 1..12) {
-            monthName = monthNames[i - 1]
+            if (month == i){
+                monthName = monthNames[i]
+            }
         }
 
         return monthName

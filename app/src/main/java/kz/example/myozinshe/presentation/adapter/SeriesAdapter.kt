@@ -35,7 +35,7 @@ class SeriesAdapter() : RecyclerView.Adapter<SeriesAdapter.SeriesViewHolder>() {
     inner class SeriesViewHolder(private val binding: ItemSeriesRcViewBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bindItem(item: Video) {
-            binding.textSeries.text = "${item.number}-${R.string.EndWordBolim}"
+            binding.textSeries.text = "${item.number}-${binding.root.context.getString(R.string.EndWordBolim)}"
 
             //https://youtu.be/hycgdjf54i8
             //http://img.youtube.com/vi/hycgdjf54i8/maxresdefault.jpg

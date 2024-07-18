@@ -6,10 +6,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.RecyclerView
 import kz.example.myozinshe.R
 import kz.example.myozinshe.data.preference.PreferenceProvider
@@ -82,9 +84,8 @@ class CategoriesFragment : Fragment() {
 
     private fun updateUI(item: CategoryMovieResponse) {
         binding?.apply {
-            shimmerInMainFragment.stopShimmer()
-            shimmerInMainFragment.visibility = View.VISIBLE
-            rcCategoryFragment.visibility = View.GONE
+            shimmerInMainFragment?.visibility = View.GONE
+            rcCategoryFragment?.visibility = View.VISIBLE
         }
 //        binding?.apply {
 //            shimmerInMainFragment?.stopShimmer()
@@ -113,7 +114,11 @@ class CategoriesFragment : Fragment() {
     private fun setupRecyclerView(recyclerView: RecyclerView?,adapter: RecyclerView.Adapter<*> ) {
         recyclerView?.apply {
             this.adapter = adapter
-            addItemDecoration(CustomDividerItemDecoration(requireContext().getDrawable(R.drawable.divider_1dp_grey)!!))
+            val dividerItemDecoration = DividerItemDecoration(requireContext(), DividerItemDecoration.VERTICAL)
+            dividerItemDecoration.setDrawable(ContextCompat.getDrawable(requireContext(),R.drawable.divider_1dp_grey)!!)
+            addItemDecoration(dividerItemDecoration)
+
+//            addItemDecoration(CustomDividerItemDecoration(requireContext().getDrawable(R.drawable.divider_1dp_grey)!!))
         }
     }
     private fun setupNavigationHost() {

@@ -75,9 +75,10 @@ class ProfileFragment : Fragment() {
         binding?.dayNightSwitch?.setOnCheckedChangeListener(null)
         binding?.dayNightSwitch?.setOnCheckedChangeListener {_, isEnabled ->
             profileViewModel.toggleDarkMode(isEnabled)
-//            activity?.recreate()
+            activity?.recreate()
         }
     }
+
 
     private fun handleLanguageSystem(item: SelectLanguageModel){
         binding?.textTvSelectLanguageText?.text = if (item.language.isNullOrEmpty())  "Қазақша" else item.language

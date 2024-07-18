@@ -93,13 +93,15 @@
         </action>
         <argument
             android:name="movieId"
-            app:argType="integer" />
+            app:argType="integer" >
+        </argument>
         <action
             android:id="@+id/action_aboutMovieFragment_to_imageFragment"
             app:destination="@id/imageFragment" />
         <action
             android:id="@+id/action_aboutMovieFragment_to_seriesFragment"
-            app:destination="@id/seriesFragment" >
+            app:destination="@id/seriesFragment"
+            app:popUpToInclusive="false">
             <argument
                 android:name="movieId"
                 app:argType="integer" />
@@ -225,6 +227,7 @@
             app:destination="@id/videoPlayerFragment" >
 
             <argument
+
                 android:name="link"
                 app:argType="string">
             </argument>
@@ -255,4 +258,12 @@
             app:argType="integer">
         </argument>
     </fragment>
+    <dialog
+        android:id="@+id/selectLanguage"
+        android:name="kz.example.myozinshe.presentation.SelectLanguage"
+        android:label="SelectLanguage" >
+        <action
+            android:id="@+id/action_selectLanguage_to_profileFragment"
+            app:destination="@id/profileFragment" />
+    </dialog>
 </navigation>

@@ -42,7 +42,6 @@ class SeriesFragment : Fragment() {
         setupUI()
         fetchSeries()
         setObserve()
-
     }
 
     private fun fetchSeries() {
@@ -85,9 +84,9 @@ class SeriesFragment : Fragment() {
                 btnBackVisible = true,
                 btnExitVisible = false,
                 title = "Бөлімдер"
-            )
 
-            onClickListener(R.id.aboutMovieFragment)
+            )
+            onClickListener(R.id.aboutMovieFragment, args.movieId)
         }
     }
     override fun onResume() {

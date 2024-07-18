@@ -2,7 +2,7 @@
     <!-- Base application theme. -->
     <!--    <style name="Base.Theme.Ozinshe." parent="Theme.MaterialComponents.NoActionBar">-->
     <!--      <style name="Base.Theme.Ozinshe." parent="Theme.MaterialComponents.NoActionBar">-->
-    <style name="Theme.MyOzinshe" parent="Theme.MaterialComponents.NoActionBar">
+    <style name="Theme.MyOzinshe" parent="Theme.Material3.DayNight.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
         <item name="android:windowFullscreen">true</item>

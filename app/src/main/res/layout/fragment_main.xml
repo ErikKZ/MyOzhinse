@@ -7,6 +7,7 @@
     android:background="?attr/backgroundColor"
     tools:context=".presentation.MainFragment">
 
+
     <ImageView
         android:id="@+id/imgERRORView"
         android:layout_width="wrap_content"
@@ -60,7 +61,8 @@
         app:layout_constraintHorizontal_bias="1.0"
 
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0">
+        app:layout_constraintVertical_bias="1.0"
+        >
 
 
         <androidx.constraintlayout.widget.ConstraintLayout

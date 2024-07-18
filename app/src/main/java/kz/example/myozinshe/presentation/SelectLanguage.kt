@@ -1,6 +1,5 @@
 package kz.example.myozinshe.presentation
 
-import android.content.Context
 import android.content.res.Configuration
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
@@ -9,17 +8,17 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
+import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import kz.example.myozinshe.R
 import kz.example.myozinshe.data.preference.PreferenceProvider
 import kz.example.myozinshe.databinding.BottomSheetLanguageBinding
-import kz.example.myozinshe.domain.models.SelectLanguageModel
 import java.util.Locale
 
 class SelectLanguage : BottomSheetDialogFragment() {
     private var binding: BottomSheetLanguageBinding? = null
-//    private val vm: VM by activityViewModels()
+    private val navController by lazy { findNavController() }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = BottomSheetLanguageBinding.inflate(inflater, container, false)
@@ -35,7 +34,6 @@ class SelectLanguage : BottomSheetDialogFragment() {
     }
 
     private fun setupLanguageButtons() {
-        val context = requireContext()
         val systemLanguage = PreferenceProvider(requireContext()).getLanguage()!!
         updateUI(systemLanguage)
         binding?.apply {
@@ -61,10 +59,11 @@ class SelectLanguage : BottomSheetDialogFragment() {
             else -> Locale.getDefault()
         }
         Locale.setDefault(locale)
-        val config = Configuration()
-        config.setLocale(locale)
-        val context: Context = requireContext().createConfigurationContext(config)
-//        requireContext().resources.updateConfiguration(config, requireContext().resources.displayMetrics)
+        val config = Configuration().apply {
+            setLocale(locale)
+        }
+//        val context: Context = requireContext().createConfigurationContext(config)
+        requireContext().resources.updateConfiguration(config, requireContext().resources.displayMetrics)
     }
 
     private fun updateUI(language: String) {
@@ -82,6 +81,7 @@ class SelectLanguage : BottomSheetDialogFragment() {
     }
 
     private fun navigateToProfile() {
+        navController.navigate(R.id.profileFragment)
 
 //        findNavController().navigate(
 //            R.id.profileFragment, arguments,

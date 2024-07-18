@@ -137,8 +137,6 @@ class VideoPlayerFragment : Fragment() {
                 btnExitVisible = false,
                 title = ""
             )
-
-            onClickListener(R.id.seriesFragment)
         }
     }
 
