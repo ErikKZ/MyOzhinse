@@ -13,6 +13,7 @@ import kz.example.myozinshe.R
 import kz.example.myozinshe.data.preference.PreferenceProvider
 import kz.example.myozinshe.databinding.FragmentSplashBinding
 import kz.example.myozinshe.domain.utils.provideNavigationHost
+import kotlin.time.Duration.Companion.seconds
 
 
 class SplashFragment : Fragment() {
@@ -23,18 +24,16 @@ class SplashFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
         binding = FragmentSplashBinding.inflate(layoutInflater,container,false)
-        return binding.root        // inflater.inflate(R.layout.fragment_splash, container, false)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         val token = PreferenceProvider(requireContext()).getToken()
-
         lifecycleScope.launch {
-            delay(1)
+            delay(1.seconds)
             navigateBasedOnToken(token)
         }
     }
@@ -45,7 +44,7 @@ class SplashFragment : Fragment() {
         if (token == "without_token") {
             findNavController().navigate(R.id.welcomeFragment)
         } else if (!token.isNullOrEmpty() ) {
-            findNavController().navigate(R.id.mainFragment)
+            findNavController().navigate(R.id.action_splashFragment_to_mainFragment)
         } else {
             findNavController().navigate(R.id.welcomeFragment)
         }

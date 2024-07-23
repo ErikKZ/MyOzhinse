@@ -16,8 +16,8 @@
         <action
             android:id="@+id/action_splashFragment_to_mainFragment"
             app:destination="@id/mainFragment"
-            app:popUpTo="@id/mainFragment"
-            app:popUpToInclusive="true" />
+            app:popUpTo="@id/splashFragment"
+            app:popUpToInclusive="true"/>
     </fragment>
     <fragment
         android:id="@+id/welcomeFragment"
@@ -62,10 +62,10 @@
         <action
             android:id="@+id/action_mainFragment_to_aboutMovieFragment"
             app:destination="@id/aboutMovieFragment"
-            app:enterAnim="@android:anim/fade_in"
-            app:exitAnim="@android:anim/fade_out"
-            app:popEnterAnim="@android:anim/fade_in"
-            app:popExitAnim="@android:anim/fade_out">
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right">
             <argument
                 android:name="movieId"
                 app:argType="integer" />
@@ -181,7 +181,6 @@
         <action
             android:id="@+id/action_searchFragment_to_categoriesFragment"
             app:destination="@id/categoriesFragment">
-
             <argument
                 android:name="categoryId"
                 app:argType="integer">
