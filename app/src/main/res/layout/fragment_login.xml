@@ -92,7 +92,8 @@
             android:fontFamily="@font/sf_regular"
             android:textColor="@color/red"
             android:visibility="gone"
-            android:text="Қате формат" />
+            android:text="Қате формат"
+            />
     </LinearLayout>
 
     <TextView
