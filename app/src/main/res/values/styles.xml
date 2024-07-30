@@ -9,7 +9,7 @@
         <item name="cornerSize">12dp</item>
     </style>
     <style name="style_corner_for_image_8dp">
-        <item name="cornerSize">12dp</item>
+        <item name="cornerSize">8dp</item>
     </style>
 
     <style name="style_editText_Oz" >

@@ -94,7 +94,10 @@ class AboutMovieFragment : Fragment() {
         }
 
         binding?.btnSimilarMovieMore?.setOnClickListener {
-            findNavController().navigate(R.id.similarFragment)
+            val action =  AboutMovieFragmentDirections.actionAboutMovieFragmentToSimilarFragment(movie.id)
+            navController.navigate(action)
+
+//            findNavController().navigate(R.id.similarFragment)
         }
     }
 

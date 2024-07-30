@@ -86,7 +86,8 @@ class SeriesFragment : Fragment() {
                 title = "Бөлімдер"
 
             )
-            onClickListener(R.id.aboutMovieFragment, args.movieId)
+            val action = SeriesFragmentDirections.actionSeriesFragmentToAboutMovieFragment(args.movieId)
+            onClickListener(R.id.aboutMovieFragment, args.movieId,action)
         }
     }
     override fun onResume() {

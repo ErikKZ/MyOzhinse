@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.view.isGone
 import androidx.core.view.isVisible
+import androidx.navigation.NavDirections
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
@@ -104,13 +105,12 @@ class MainActivity : AppCompatActivity(), NavigationHostProvider {
         titleTextView.text = title
     }
 
-    override fun onClickListener(id: Int,arg: Int  ) {
+    override fun onClickListener(id: Int, arg: Int, action: NavDirections) {
         val toolbarUpnavBinding = binding?.linerLayoutToolbar as ToolbarUpnavBinding
         toolbarUpnavBinding.btnBack.setOnClickListener {
             if (arg == 0) {
                 findNavController(R.id.nav_host_fragment).navigate(id)
             } else {
-                val action = SeriesFragmentDirections.actionSeriesFragmentToAboutMovieFragment(arg)
                 findNavController(R.id.nav_host_fragment).navigate(action)
             }
         }

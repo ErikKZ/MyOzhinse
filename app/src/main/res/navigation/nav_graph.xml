@@ -113,6 +113,11 @@
                 android:name="link"
                 app:argType="string" />
         </action>
+        <action
+            android:id="@+id/action_aboutMovieFragment_to_similarFragment"
+            app:destination="@id/similarFragment">
+        </action>
+
     </fragment>
     <fragment
         android:id="@+id/categoriesFragment"
@@ -212,6 +217,10 @@
         <action
             android:id="@+id/action_similarFragment_to_aboutMovieFragment"
             app:destination="@id/aboutMovieFragment" />
+        <argument
+            android:name="movieId"
+            app:argType="integer">
+        </argument>
     </fragment>
     <fragment
         android:id="@+id/seriesFragment"
